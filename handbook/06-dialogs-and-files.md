@@ -163,19 +163,18 @@ a moment, so a fast job does not blink; `RemoveOnClose: true` removes it after `
 
 ## A place to drop files: FilePicker
 
-`FilePicker` is a place to drop files on, or to click for a file dialog. `picker.Get("files")` is its list, a `[]any`
-of maps: `name`, `path`, `size`, `sizeText`, `type`, `extension`, `lastModified`.
+`FilePicker` is a place to drop files on, or to click for a file. `picker.Get("files")` is its list, a `[]any` of
+maps: `name`, `path`, `size`, `sizeText`, `type`, `extension`, `lastModified`.
 
-A file dropped on it comes from the page, and the page never knows where a file is: `path` is only its name. Give the
-click the dialog of the system with `OnOpenDialog`, and its files come with their real paths:
+A click opens the file dialog of the system, so the chosen files come with their real paths; `picker.Paths()` lists
+them. A file dropped on it comes from the page, and the page never knows where a file is: its `path` is only its name,
+and it is not in `Paths()`.
 
 ```go
 package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 
 	ui "github.com/bug7a/ozdenui-go"
 )
@@ -193,25 +192,11 @@ func start(page *ui.Object) {
 	page.Set("color", "#F4F5F7")
 	ui.VGroup(ui.Props{Gap: 14, Padding: 24, Align: "left top"}, func() {
 		ui.FilePicker(ui.FilePickerProps{Width: "100%", ZoneHeight: 140, Multiple: true, ShowList: false,
-			TitleText: "Drop files here", OnOpenDialog: chooseFiles, OnChange: showFiles})
+			TitleText: "Drop files here", OnChange: showFiles})
 		list = ui.VGroup(ui.Props{Width: "100%", Height: "auto", Gap: 6, Align: "left top"}, func() {
 			rows = append(rows, ui.Label(ui.Props{Text: "No files yet.", FontSize: 14, TextColor: "#5A6270"}))
 		})
 	})
-}
-
-// chooseFiles opens the file dialog of the system in the place of the one of the page.
-func chooseFiles(picker *ui.Object) {
-	files := []ui.P{}
-	for _, path := range ui.OpenFiles() {
-		info, err := os.Stat(path)
-		if err != nil {
-			continue
-		}
-		files = append(files, ui.P{"name": filepath.Base(path), "path": path, "size": info.Size(),
-			"lastModified": info.ModTime().UnixMilli()})
-	}
-	picker.Call("addFiles", files)
 }
 
 func showFiles(picker *ui.Object) {
@@ -233,7 +218,10 @@ func showFiles(picker *ui.Object) {
 - `Accept: ".csv,.txt"` or `"image/*"`; `MaxSize` (bytes) and `MaxFiles`: what does not pass goes to
   `OnError`. `Multiple: true` adds to the list; without it a new file takes the place of the old one.
 - `picker.Call("clear")` empties it; `TitleText`, `DescriptionText`: its texts; `IconFile`: a picture of yours.
-- The bytes of a dropped file do not reach Go. For the content of a file, use the dialog of the system, as above.
+- `picker.AddFiles("report.pdf", "notes.txt")` adds files of this computer from the code. `OnOpenDialog:
+  func(picker *ui.Object)` puts a dialog of your own in the place of the one of the system.
+- The bytes of a dropped file do not reach Go. For the content of a file, read it from its path (`os.ReadFile`): a
+  click gives one, a drop does not.
 
 ## Next
 

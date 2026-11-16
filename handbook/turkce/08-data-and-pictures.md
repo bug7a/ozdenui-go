@@ -108,7 +108,7 @@ var (
 )
 
 func main() {
-	ui.Run(start, ui.Window{Title: "Kişiler", Width: 520, Height: 420})
+	ui.Run(start, ui.Window{Title: "Kişiler", Width: 520, Height: 420, Language: "tr"})
 }
 
 func start(page *ui.Object) {
@@ -229,7 +229,7 @@ kendiliğinden `ui.Do()`'dan geçer ve her `Write` bir satırdır (ya da daha ç
 | `ui.MarkdownView(ui.MarkdownViewProps{MarkdownText: "# Bir rapor\n\nBirkaç **kalın** kelime"})` | `view.Call("appendText", piece)` sona ekler: bir yapay zekânın geldikçe yazdığı cevap; `view.Set("markdownText", text)` |
 | `ui.JsonView(ui.JsonViewProps{Value: data, Height: 400, OnSelect: fn})` | herhangi bir Go değeri (bir struct alanlarının sırasını korur); bir tıklama: `OnSelect: func(view *ui.Object, entry ui.P)`, `entry["pathText"]` (`users[0].name`) |
 | `ui.JsonEditor(ui.JsonEditorProps{Value: rows, Height: 360, OnChange: fn})` | bir tabloda yazılan JSON listesi ya da map'i; `OnChange: func(editor *ui.Object, list []product)` değerin bütününü sizin türünüzde alır |
-| `ui.CodeEditor(ui.CodeEditorProps{Value: "x = 1", Language: "python", Height: 300, OnChange: fn})` | metni sorulur: `editor.Ask("getValue")`; Python, JavaScript, JSON, HTML, CSS, SQL, Bash |
+| `ui.CodeEditor(ui.CodeEditorProps{Value: "x := 1", Language: "go", Height: 300, OnChange: fn})` | metni sorulur: `editor.Ask("getValue")`; Go, Python, JavaScript, JSON, HTML, CSS, SQL, Bash |
 | `ui.ChatView(ui.ChatViewProps{EmptyText: "Bir şey sorun", OnSend: answer})` | `OnSend: func(chat *ui.Object, text string)`; bir cevap: `chat.Call("addMessage", ui.P{"key": key, "role": "assistant"})`, sonra `chat.Call("appendText", key, piece)`; `chat.Set("busy", true)` noktaları ve Durdur'u gösterir |
 | `ui.WebView(ui.WebViewProps{HtmlText: page, Height: 400})` | bir web sayfası (`Url`) ya da betikleriyle bir HTML metni; `OnMessage: func(view *ui.Object, data T)` sayfasının `parent.postMessage` ile gönderdiğini alır |
 

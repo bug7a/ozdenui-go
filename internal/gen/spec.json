@@ -187,6 +187,11 @@
     "themeParam": true
   },
   "GridGroup": {
+    "boxFields": [
+      "padding",
+      "color",
+      "round"
+    ],
     "container": "self"
   },
   "ImageView": {

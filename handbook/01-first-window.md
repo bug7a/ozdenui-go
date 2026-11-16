@@ -108,12 +108,13 @@ your Go code ──commands──▶ the page (basic.js objects) ──▶ what 
 
 ```go
 ui.Window{
-	Title:  "Notes", // the title of the window ("OzdenUI" when empty)
-	Width:  800,     // the size of the page in px (800 x 600 when 0)
-	Height: 600,
-	Theme:  "light", // "light", "dark" or "auto" (what the system asks): chapter 7
-	Style:  "",      // "" or "minimal": chapter 7
-	Debug:  false,   // true: the developer tools of the web view (right click > Inspect)
+	Title:    "Notes", // the title of the window ("OzdenUI" when empty)
+	Width:    800,     // the size of the page in px (800 x 600 when 0)
+	Height:   600,
+	Theme:    "light", // "light", "dark" or "auto" (what the system asks): chapter 7
+	Style:    "",      // "" or "minimal": chapter 7
+	Language: "en",    // the language of its texts: "tr" writes the capital letters of Turkish ("İ")
+	Debug:    false,   // true: the developer tools of the web view (right click > Inspect)
 }
 ```
 

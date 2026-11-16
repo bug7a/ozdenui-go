@@ -114,8 +114,8 @@ func start(page *ui.Object) {
   (counted from 0).
 - **Inside the function of a group, its own variable is not set yet** (`grid := ui.GridGroup(..., func() { grid... })`
   is `nil` there): the group is `ui.Current()`.
-- Unlike the other groups, a grid is as high as its rows (`Height: "auto"`), and it has no `Padding`: a group around
-  it gives the space. `examples/calculator` is a whole calculator.
+- Unlike the other groups, a grid is as high as its rows (`Height: "auto"`). `Padding`, `Color` and `Round` are
+  fields of its own, as in a group. `examples/calculator` is a whole calculator.
 
 ## Things that go out of a group
 

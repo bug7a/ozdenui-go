@@ -181,6 +181,9 @@ func makeComponent(typeName string, read given, content []func()) *Object {
 		}
 		setDefault(values, key, value)
 	}
+	if typeName == "FilePicker" && values["onOpenDialog"] == nil {
+		values["onOpenDialog"] = openDialogOfPicker // WHY: the dialog of the page gives no path (files.go)
+	}
 	for _, name := range spec.Sync {
 		if values[name] == nil {
 			values[name] = keepState // WHY: the state of the component comes back with this callback

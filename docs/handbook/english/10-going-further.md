@@ -231,7 +231,7 @@ program is about 15 MB. On macOS the build needs cgo (the web view of the system
 - A callback that must answer at once can not be a Go function, because the answer comes later: a validator, a
   function that builds the objects of a row (`createItemView`). Format the values of a table in Go; the numbers of a
   `GraphBox` or a `Stepper` take a format text (chapter 8).
-- A file dropped on the window gives a `FilePicker` its name, not its path (chapter 6).
+- A file dropped on a `FilePicker` gives its name, not its path; a file chosen with a click has its path (chapter 6).
 - A bubble of a `Tooltip` shows a text, not objects of your own.
 - Fifteen components change their theme while they are on the page; the others take it when they are made (chapter 7).
 - No hot reload: `go run .` again.

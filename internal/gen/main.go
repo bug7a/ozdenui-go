@@ -56,6 +56,7 @@ type entry struct {
 	DarkStyle     string            `json:"darkStyle"`
 	HasMinimal    bool              `json:"hasMinimal"`
 	ThemeParam    bool              `json:"themeParam"`
+	BoxFields     []string          `json:"boxFields"` // values of its box that get a field of their own (padding, color)
 	Doc           string            `json:"doc"`
 }
 
@@ -81,6 +82,12 @@ var (
 	sizeName      = regexp.MustCompile(`(?i)(width|height|size|left|top|right|bottom|gap|padding|round|value|key|count|index)$`)
 	// Not components to make: helpers of the kit and the ones with functions of their own in this module.
 	noFunction = map[string]bool{"UI": true, "UIEffects": true, "TapEffect": true, "ScrollBar": true, "MinimalAccent": true, "Toast": true}
+	// What the fields of spec.json "boxFields" say.
+	boxFieldComments = map[string]string{
+		"padding": "20 or []int{x, y}: the room between its edge and its objects",
+		"color":   "its ground",
+		"round":   "its corners, px",
+	}
 	// Fields every Props type has besides the params of its component.
 	commonFields = []param{
 		{"left", "", "with Top: a place of its own in a Box or on the page"},
@@ -369,6 +376,9 @@ func writeType(out *bytes.Buffer, name, file string, item *entry, params []param
 		writeField(item, false)
 	}
 	out.WriteString("\n")
+	for _, name := range item.BoxFields {
+		writeField(param{name, "", boxFieldComments[name]}, true)
+	}
 	for _, item := range commonFields {
 		writeField(item, true)
 	}

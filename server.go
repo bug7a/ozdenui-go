@@ -127,7 +127,11 @@ func (s *server) serveIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "no-store")
 	// The size of the page the program asked for: a browser window fits itself to it before the program starts (bridge.js)
 	size := fmt.Sprintf(`<meta name="ozdenui-size" content="%dx%d">`, s.app.window.Width, s.app.window.Height)
-	_, _ = w.Write(bytes.Replace(page, []byte("<title>ozdenui</title>"), []byte(title+"\n        "+size), 1))
+	page = bytes.Replace(page, []byte("<title>ozdenui</title>"), []byte(title+"\n        "+size), 1)
+	if language := s.app.window.Language; language != "" {
+		page = bytes.Replace(page, []byte(`<html lang="en">`), []byte(`<html lang="`+html.EscapeString(language)+`">`), 1)
+	}
+	_, _ = w.Write(page)
 }
 
 // The event stream of the page: every message of the program is one "data:" line.

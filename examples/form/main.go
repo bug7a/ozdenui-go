@@ -80,9 +80,8 @@ func values() string {
 		"name: " + name.Text(),
 		"email: " + email.Text(),
 		"budget: " + budget.Text(),
-		// WHY Measure: Value() of a picker is "" until the user changes it, also when it was made with a date
-		fmt.Sprint("date: ", date.Measure("value")),
-		fmt.Sprint("time: ", clock.Measure("value")),
+		fmt.Sprint("date: ", date.Value()),
+		fmt.Sprint("time: ", clock.Value()),
 		fmt.Sprint("color: ", color.Value()),
 		fmt.Sprint("guests: ", guests.Value()),
 		fmt.Sprint("quiet: ", noise.Value()),
@@ -94,15 +93,9 @@ func showNoise(slider *ui.Object) {
 	result.SetText(fmt.Sprint("How quiet: ", slider.Value()))
 }
 
-// isRight shows the warning of an empty required field or a wrong value, and tells whether there is none.
-func isRight(field *ui.Object) bool {
-	field.Call("checkInputValue")
-	return field.Measure("status") == 0.0 // 0: no warning, 1: empty but required, 2: not valid
-}
-
 func send() {
 	// WHY every field and not "&&": each one shows its warning, not only the first one
-	answers := []bool{isRight(name), isRight(email), isRight(password)}
+	answers := []bool{name.Check(), email.Check(), password.Check()}
 	for _, right := range answers {
 		if !right {
 			ui.ToastError("Look at the marked fields.")

@@ -232,7 +232,7 @@ program yaklaşık 15 MB'tır. macOS'ta derleme cgo ister (sistemin web görün�
 - Hemen cevap vermesi gereken bir callback bir Go fonksiyonu olamaz, çünkü cevap sonra gelir: bir doğrulayıcı, bir
   satırın nesnelerini kuran bir fonksiyon (`createItemView`). Bir tablonun değerlerini Go'da biçimlendirin; bir
   `GraphBox`'ın ya da bir `Stepper`'ın sayıları bir biçim metni alır (8. bölüm).
-- Pencereye bırakılan bir dosya bir `FilePicker`'a yolunu değil adını verir (6. bölüm).
+- Bir `FilePicker`'a bırakılan dosya yolunu değil adını verir; tıklayarak seçilen dosyanın yolu vardır (6. bölüm).
 - Bir `Tooltip`'in balonu sizin nesnelerinizi değil, bir metin gösterir.
 - On beş bileşen sayfadayken temasını değiştirebilir; öbürleri onu yapılırken alır (7. bölüm).
 - Hot reload yok: yeniden `go run .`.

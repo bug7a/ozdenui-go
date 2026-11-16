@@ -228,7 +228,7 @@ through `ui.Do()` by itself, and every `Write` is a line (or more). `examples/jo
 | `ui.MarkdownView(ui.MarkdownViewProps{MarkdownText: "# A report\n\nSome **bold** words"})` | `view.Call("appendText", piece)` adds to the end: the answer of an AI as it comes; `view.Set("markdownText", text)` |
 | `ui.JsonView(ui.JsonViewProps{Value: data, Height: 400, OnSelect: fn})` | any Go value (a struct keeps the order of its fields); a click: `OnSelect: func(view *ui.Object, entry ui.P)`, `entry["pathText"]` (`users[0].name`) |
 | `ui.JsonEditor(ui.JsonEditorProps{Value: rows, Height: 360, OnChange: fn})` | a list or a map of JSON written in a table; `OnChange: func(editor *ui.Object, list []product)` gets the whole value in your type |
-| `ui.CodeEditor(ui.CodeEditorProps{Value: "x = 1", Language: "python", Height: 300, OnChange: fn})` | its text is asked: `editor.Ask("getValue")`; Python, JavaScript, JSON, HTML, CSS, SQL, Bash |
+| `ui.CodeEditor(ui.CodeEditorProps{Value: "x := 1", Language: "go", Height: 300, OnChange: fn})` | its text is asked: `editor.Ask("getValue")`; Go, Python, JavaScript, JSON, HTML, CSS, SQL, Bash |
 | `ui.ChatView(ui.ChatViewProps{EmptyText: "Ask something", OnSend: answer})` | `OnSend: func(chat *ui.Object, text string)`; an answer: `chat.Call("addMessage", ui.P{"key": key, "role": "assistant"})`, then `chat.Call("appendText", key, piece)`; `chat.Set("busy", true)` shows the dots and Stop |
 | `ui.WebView(ui.WebViewProps{HtmlText: page, Height: 400})` | a web page (`Url`) or an HTML text with its scripts; `OnMessage: func(view *ui.Object, data T)` gets what its page sends with `parent.postMessage` |
 

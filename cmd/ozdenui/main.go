@@ -37,7 +37,7 @@ import (
 var rules string
 
 const (
-	version       = "0.1.0" // the Version of the module (its test compares them)
+	version       = "0.1.1" // the Version of the module (its test compares them)
 	defaultTarget = "AGENTS.md"
 	command       = "go run github.com/bug7a/ozdenui-go/cmd/ozdenui@latest"
 	startMark     = "<!-- ozdenui-go: start (written by the agents command of ozdenui-go; the next run writes this part again) -->"

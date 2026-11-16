@@ -184,6 +184,8 @@ ui.Run(start, ui.Window{Theme: "dark"})                                  // "lig
 ui.Run(start, ui.Window{Style: "minimal", Accent: "#2A78D6"})            // small, made of lines, one color
 ```
 
+`ui.Window{Language: "tr"}` is the language of the texts of the window (capital letters, word breaks).
+
 In a dark window every component takes its dark look by itself, and the plain objects and the page are dark too.
 `ui.SetTheme("dark")` changes it while the program runs (`start()` runs again). One component:
 `StyleName: "..."` (the doc of its function names its packages) or `Style: ui.P{"box": ui.P{"round": 12}}`.
@@ -209,7 +211,8 @@ In a dark window every component takes its dark look by itself, and the plain ob
 - One window for a program.
 - A callback of the kit that must answer at once (a validator, `createItemView`) can not be a Go function: the answer
   of the program comes after the page has drawn.
-- A file dropped on the window gives a `FilePicker` its name, not its path on the computer (`ui.OpenFile()` gives a path).
+- A file dropped on a `FilePicker` gives its name, not its path on the computer; a click on it opens the file dialog
+  of the system, and those files have their paths (`picker.Paths()`).
 - No hot reload: `go run .` again.
 
 ## Development

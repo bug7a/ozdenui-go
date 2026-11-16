@@ -37,7 +37,7 @@ import (
 )
 
 // Version is the version of the module.
-const Version = "0.1.0"
+const Version = "0.1.1"
 
 const (
 	readyTimeout    = 15 * time.Second
@@ -62,6 +62,9 @@ type Window struct {
 	// button (SmartButton with Tone: "accent") take it. AccentDark: its color in a dark window ("": made from Accent).
 	Accent     string
 	AccentDark string
+	// Language: the language of the texts of the window ("en" when empty; "tr", "de"...). The page writes capital
+	// letters, breaks words and sorts by it: a table title in Turkish is "SİPARİŞLER" only with "tr".
+	Language string
 	// Debug: the developer tools of the web view (right click > Inspect).
 	Debug bool
 }

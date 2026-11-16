@@ -23,8 +23,6 @@ var qualities = []string{"Low", "Normal", "High"}
 var (
 	name, language, email, sms *ui.Object
 	sounds, volume, saved      *ui.Object
-	// WHY kept by the program: a radio unchecked by a click on another one tells nothing, so its Checked() stays true
-	chosenQuality = "Normal"
 )
 
 func main() {
@@ -78,16 +76,15 @@ func soundPanel() {
 		volume = ui.Slider(ui.SliderProps{Value: 7, MinValue: 0, MaxValue: 10, Width: formWidth, StyleName: "round"})
 		ui.HGroup(ui.Props{Hug: true, Gap: 18}, func() {
 			for _, quality := range qualities {
-				ui.RadioButton(ui.RadioButtonProps{Group: "quality", Value: quality, LabelText: quality, Checked: quality == chosenQuality,
-					OnChange: func() { chosenQuality = quality }})
+				ui.RadioButton(ui.RadioButtonProps{Group: "quality", Value: quality, LabelText: quality, Checked: quality == "Normal"})
 			}
 		})
 	})
 }
 
 func values() string {
-	return fmt.Sprintf("name: %s, language: %v, email: %t, sms: %t, sounds: %t, volume: %v, quality: %s",
-		name.Text(), language.Value(), email.Checked(), sms.Checked(), sounds.Checked(), volume.Value(), chosenQuality)
+	return fmt.Sprintf("name: %s, language: %v, email: %t, sms: %t, sounds: %t, volume: %v, quality: %v",
+		name.Text(), language.Value(), email.Checked(), sms.Checked(), sounds.Checked(), volume.Value(), ui.RadioValue("quality"))
 }
 
 func save() {

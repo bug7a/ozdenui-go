@@ -116,8 +116,8 @@ func start(page *ui.Object) {
   (0'dan sayılır).
 - **Bir grubun fonksiyonunun içinde, grubun kendi değişkeni henüz atanmamıştır** (`grid := ui.GridGroup(..., func() {
   grid... })` orada `nil`'dir): grup `ui.Current()`'tir.
-- Öbür gruplardan farklı olarak bir ızgara satırları kadar yüksektir (`Height: "auto"`) ve `Padding`'i yoktur: boşluğu
-  çevresindeki bir grup verir. `examples/calculator` eksiksiz bir hesap makinesidir.
+- Öbür gruplardan farklı olarak bir ızgara satırları kadar yüksektir (`Height: "auto"`). `Padding`, `Color` ve `Round`
+  bir gruptaki gibi kendi alanlarıdır. `examples/calculator` eksiksiz bir hesap makinesidir.
 
 ## Gruptan taşanlar
 

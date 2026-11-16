@@ -165,19 +165,18 @@ bir ekran için.
 
 ## Dosya bırakılacak bir yer: FilePicker
 
-`FilePicker`, dosya bırakılan ya da tıklayınca dosya penceresini açan bir yerdir. `picker.Get("files")` onun listesidir,
+`FilePicker`, dosya bırakılan ya da tıklayınca dosya seçilen bir yerdir. `picker.Get("files")` onun listesidir,
 map'lerden oluşan bir `[]any`: `name`, `path`, `size`, `sizeText`, `type`, `extension`, `lastModified`.
 
-Üstüne bırakılan bir dosya sayfadan gelir ve sayfa bir dosyanın nerede olduğunu hiç bilmez: `path` yalnız onun adıdır.
-Tıklamaya `OnOpenDialog` ile sistemin dosya penceresini verin; dosyaları gerçek yollarıyla gelir:
+Bir tıklama sistemin dosya penceresini açar, bu yüzden seçilen dosyalar gerçek yollarıyla gelir; `picker.Paths()`
+onları listeler. Üstüne bırakılan bir dosya sayfadan gelir ve sayfa bir dosyanın nerede olduğunu hiç bilmez: `path`'i
+yalnız adıdır ve `Paths()` içinde yoktur.
 
 ```go
 package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 
 	ui "github.com/bug7a/ozdenui-go"
 )
@@ -195,25 +194,11 @@ func start(page *ui.Object) {
 	page.Set("color", "#F4F5F7")
 	ui.VGroup(ui.Props{Gap: 14, Padding: 24, Align: "left top"}, func() {
 		ui.FilePicker(ui.FilePickerProps{Width: "100%", ZoneHeight: 140, Multiple: true, ShowList: false,
-			TitleText: "Dosyaları buraya bırakın", OnOpenDialog: chooseFiles, OnChange: showFiles})
+			TitleText: "Dosyaları buraya bırakın", OnChange: showFiles})
 		list = ui.VGroup(ui.Props{Width: "100%", Height: "auto", Gap: 6, Align: "left top"}, func() {
 			rows = append(rows, ui.Label(ui.Props{Text: "Henüz dosya yok.", FontSize: 14, TextColor: "#5A6270"}))
 		})
 	})
-}
-
-// chooseFiles sayfanınkinin yerine sistemin dosya penceresini açar.
-func chooseFiles(picker *ui.Object) {
-	files := []ui.P{}
-	for _, path := range ui.OpenFiles() {
-		info, err := os.Stat(path)
-		if err != nil {
-			continue
-		}
-		files = append(files, ui.P{"name": filepath.Base(path), "path": path, "size": info.Size(),
-			"lastModified": info.ModTime().UnixMilli()})
-	}
-	picker.Call("addFiles", files)
 }
 
 func showFiles(picker *ui.Object) {
@@ -235,8 +220,10 @@ func showFiles(picker *ui.Object) {
 - `Accept: ".csv,.txt"` ya da `"image/*"`; `MaxSize` (bayt) ve `MaxFiles`: geçemeyenler `OnError`'a gider.
   `Multiple: true` listeye ekler; bu olmadan yeni dosya eskisinin yerini alır.
 - `picker.Call("clear")` listeyi boşaltır; `TitleText`, `DescriptionText`: metinleri; `IconFile`: sizin bir resminiz.
-- Bırakılan bir dosyanın baytları Go'ya ulaşmaz. Bir dosyanın içeriği için, yukarıdaki gibi sistemin penceresini
-  kullanın.
+- `picker.AddFiles("rapor.pdf", "notlar.txt")` bu bilgisayarın dosyalarını koddan ekler. `OnOpenDialog:
+  func(picker *ui.Object)` sistemin penceresinin yerine sizin bir pencerenizi koyar.
+- Bırakılan bir dosyanın baytları Go'ya ulaşmaz. Bir dosyanın içeriği için onu yolundan okuyun (`os.ReadFile`): yolu
+  bir tıklama verir, bir bırakma vermez.
 
 ## Sonraki
 

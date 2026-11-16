@@ -24,6 +24,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"reflect"
 	"regexp"
 	"strings"
@@ -74,6 +75,29 @@ func TestFormat(t *testing.T) {
 type testRow struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
+}
+
+func TestFilesOfThisComputer(t *testing.T) {
+	cases := map[string]string{
+		"":               "",
+		".pdf,.docx":     "pdf docx",
+		".CSV, .txt":     "csv txt",
+		"image/*":        "png jpg jpeg gif webp svg bmp",
+		"nobody/knows":   "",
+		".pdf, nobody/x": "",
+	}
+	for accept, want := range cases {
+		if got := strings.Join(fileTypesOf(accept), " "); got != want {
+			t.Errorf("fileTypesOf(%q) = %q, want %q", accept, got, want)
+		}
+	}
+	file := fileForPage("go.mod", false)
+	if file == nil || file["name"] != "go.mod" || !filepath.IsAbs(file["path"].(string)) || file["size"].(int64) == 0 {
+		t.Errorf(`fileForPage("go.mod") = %v`, file)
+	}
+	if fileForPage("web", false) != nil || fileForPage("no-such-file", false) != nil {
+		t.Error("fileForPage: a folder or a missing file is not a file")
+	}
 }
 
 func TestPicture(t *testing.T) {

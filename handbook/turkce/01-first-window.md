@@ -109,12 +109,13 @@ Go kodunuz ──komutlar──▶ sayfa (basic.js nesneleri) ──▶ gördü�
 
 ```go
 ui.Window{
-	Title:  "Notlar", // pencerenin başlığı (boşsa "OzdenUI")
-	Width:  800,      // sayfanın px olarak boyutu (0 ise 800 x 600)
-	Height: 600,
-	Theme:  "light", // "light", "dark" ya da "auto" (sistem ne istiyorsa): 7. bölüm
-	Style:  "",      // "" ya da "minimal": 7. bölüm
-	Debug:  false,   // true: web görünümünün geliştirici araçları (sağ tık > Inspect)
+	Title:    "Notlar", // pencerenin başlığı (boşsa "OzdenUI")
+	Width:    800,      // sayfanın px olarak boyutu (0 ise 800 x 600)
+	Height:   600,
+	Theme:    "light", // "light", "dark" ya da "auto" (sistem ne istiyorsa): 7. bölüm
+	Style:    "",      // "" ya da "minimal": 7. bölüm
+	Language: "tr",    // metinlerinin dili: "tr" büyük harfleri Türkçe yazar ("İ"); boşsa "en"
+	Debug:    false,   // true: web görünümünün geliştirici araçları (sağ tık > Inspect)
 }
 ```
 

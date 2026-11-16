@@ -7,7 +7,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"strings"
 	"unicode/utf8"
 
 	ui "github.com/bug7a/ozdenui-go"
@@ -83,13 +82,8 @@ func main() {
 
 // A small picture made here (an SVG): a ground and a sun.
 func pictureOf(ground, sun string) string {
-	return svgAddress(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="%s"/>`+
-		`<circle cx="100" cy="90" r="46" fill="%s"/><rect y="150" width="200" height="50" fill="%s" opacity="0.5"/></svg>`, ground, sun, sun))
-}
-
-// WHY not ui.Picture([]byte(svg)): it names an SVG "text/xml", and the page does not draw it as a picture.
-func svgAddress(svg string) string {
-	return "data:image/svg+xml;utf8," + strings.NewReplacer("#", "%23", "\"", "'", "\n", " ").Replace(svg)
+	return ui.Picture([]byte(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="%s"/>`+
+		`<circle cx="100" cy="90" r="46" fill="%s"/><rect y="150" width="200" height="50" fill="%s" opacity="0.5"/></svg>`, ground, sun, sun)))
 }
 
 func start(page *ui.Object) {
@@ -366,7 +360,7 @@ func drawSecondColumn() {
 	})
 
 	card("ImageView", func() {
-		ui.ImageView(ui.ImageViewProps{Height: 170, ImageFile: svgAddress(picture), EnlargeToFit: true, AltText: "A circle on a square"})
+		ui.ImageView(ui.ImageViewProps{Height: 170, ImageFile: ui.Picture([]byte(picture)), EnlargeToFit: true, AltText: "A circle on a square"})
 	})
 
 	card("CodeEditor", func() {
@@ -429,7 +423,7 @@ func drawSecondColumn() {
 	})
 
 	card("JsonEditor", func() {
-		ui.JsonEditor(ui.JsonEditorProps{Height: 340, Value: inOrder(products), TitleText: "Products", OnChange: countProducts})
+		ui.JsonEditor(ui.JsonEditorProps{Height: 340, Value: products, TitleText: "Products", OnChange: countProducts})
 	})
 
 	card("FilePicker", func() {
@@ -454,12 +448,6 @@ func bubbleLook() ui.P {
 // A bubble at the button that goes by itself.
 func showBubble(button *ui.Object) {
 	ui.ShowHint(button, "It goes by itself.", 1500)
-}
-
-// The value as JSON: a struct goes to the page as a map, and the columns of the editor would come in the order of A-Z.
-func inOrder(value any) json.RawMessage {
-	text, _ := json.Marshal(value)
-	return text
 }
 
 // OnChange of the JsonEditor: the whole value, as a list of products.

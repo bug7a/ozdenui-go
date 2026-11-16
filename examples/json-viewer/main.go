@@ -5,7 +5,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 
@@ -74,9 +73,7 @@ func start(page *ui.Object) {
 			ui.P{"key": "expand", "text": "Open all"},
 			ui.P{"key": "collapse", "text": "Close all"},
 		}})
-		// WHY as JSON text: a struct given as it is reaches the page as a map, and its keys come out sorted.
-		ordered, _ := json.Marshal(firstValue)
-		jsonView = ui.JsonView(ui.JsonViewProps{Fill: true, Value: json.RawMessage(ordered), ExpandLevel: 2,
+		jsonView = ui.JsonView(ui.JsonViewProps{Fill: true, Value: firstValue, ExpandLevel: 2,
 			OnSelect: showEntry, OnCopy: showCopied})
 		status = ui.StatusBar(ui.StatusBarProps{MessageText: "Click a row: its path comes here."})
 	})

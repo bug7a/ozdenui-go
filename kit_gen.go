@@ -1873,6 +1873,9 @@ type GridGroupProps struct {
 	Align       string // default: "". "": the objects fill their cells. "left center", "center"...: where each one stands in its cell.
 	ClipContent any    // default: 0
 
+	Padding   any // 20 or []int{x, y}: the room between its edge and its objects
+	Color     any // its ground
+	Round     any // its corners, px
 	Left      any // with Top: a place of its own in a Box or on the page
 	Top       any
 	StyleName string // the package of its look (see the function)

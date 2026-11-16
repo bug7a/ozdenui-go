@@ -81,6 +81,7 @@ func addNote() {
 
 - `ui.Window{Title, Width, Height, Theme: "light" | "dark" | "auto", Style: "" | "minimal", Accent: "#2A78D6"}`;
   `Width` and `Height` are the size of the page. `ui.Close()`, `ui.SetTitle()`, `ui.Theme()`, `ui.IsDark()`.
+  `Language: "tr"` when the texts of the window are not English (the capital letters of Turkish: "İ").
 - Objects are made in `start()` or later (an event, a timer), never before `ui.Run()`.
 - Every object is a `*ui.Object`: keep the ones the program changes later in variables (or in a struct of your own).
 
@@ -161,6 +162,7 @@ Each is a function of `ozdenui` with its `...Props` type; its state is read from
   (the text of the pressed button). The window keeps working while the code waits.
 - The file dialogs of the system: `ui.OpenFile()`, `ui.OpenFiles()`, `ui.SaveFile()`, `ui.ChooseFolder()` return a real
   path or `""`; `ui.FileOptions{Title, Directory, FileName, Types: []string{"png", "jpg"}}`.
+  A click on a `FilePicker` opens that dialog too: `picker.Paths()` are the chosen files (a dropped file has no path).
 - A picture (`ui.Icon(ui.Props{Picture: "photo.png"})`, a field whose name ends with `File`: `IconFile`, `ImageFile`)
   takes a path of this computer; in another place (an item of a list): `ui.Picture("photo.png")`, also of bytes or an
   `image.Image`.

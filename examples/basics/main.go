@@ -5,7 +5,6 @@
 package main
 
 import (
-	"encoding/base64"
 	"strings"
 
 	ui "github.com/bug7a/ozdenui-go"
@@ -19,8 +18,8 @@ var cardColors = []string{"#5BBAC1", "#E0A038", "#E8796D", "#65A293"}
 const checkSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="white"/>` +
 	`<path d="M7.5 12.5l3 3 6-7" fill="none" stroke="#2B2B2B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 
-// WHY a data address and not the bytes: ui.Picture() takes SVG bytes for XML text, not for a picture.
-var picture = "data:image/svg+xml;base64," + base64.StdEncoding.EncodeToString([]byte(checkSvg))
+// The address of the drawing for the page.
+var picture = ui.Picture([]byte(checkSvg))
 
 var (
 	colorNumber = 0

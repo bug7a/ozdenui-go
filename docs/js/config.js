@@ -30,7 +30,7 @@ const CONFIG = {
 
     // *** THE MODULE:
     modulePath: "github.com/bug7a/ozdenui-go",
-    version: "0.1.0",
+    version: "0.1.1",
     goVersion: "1.22",
     githubURL: "https://github.com/bug7a/ozdenui-go", // the repository of the module ("": the GitHub button is hidden)
 
@@ -43,7 +43,7 @@ const CONFIG = {
     pythonURL: "https://bug7a.github.io/ozdenui-python/", // OzdenUI for Python, the twin of this module
     authorURL: "https://bug7a.github.io/",
 
-    // *** FACTS: (of ozdenui-go v0.1.0: its README, kit_gen.go and web/)
+    // *** FACTS: (of ozdenui-go v0.1.1: its README, kit_gen.go and web/)
     // WHY \u00A0: a number and its unit stay on one line
     componentCount: 83,           // the components of the kit, each a function with its own ...Props type (kit_gen.go)
     embedSize: "3.5\u00A0MB",     // basic.js and the components inside the program (go:embed of web/)
