@@ -1,0 +1,42 @@
+# Every push: the tests (with a real page in a hidden browser), then a picture of every example, light and dark,
+# on macOS, Windows and Linux.
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        go: ["1.22", "stable"]  # the oldest the module takes, the newest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+      - name: Build
+        run: go build ./...
+      - name: The kit copy and kit_gen.go agree
+        shell: bash
+        run: |
+          go run ./internal/gen
+          git diff --exit-code kit_gen.go
+      - name: The tests
+        run: go test ./...
+      - name: Every example in a hidden browser
+        shell: bash
+        run: checks/look-all.sh pictures
+      - name: The pictures of the windows
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pictures-${{ matrix.os }}-${{ matrix.go }}
+          path: pictures
+          if-no-files-found: ignore
