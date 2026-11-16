@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>OzdenUI for Go – Modern desktop windows, in plain Go</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OzdenUI for Go opens a small, modern window of its own from Go: boxes, texts, buttons and the 83 ready components of basic.js, each with its own Go type. Only Go: no JavaScript, no HTML, no front-end build. The built program is one file.">
+    <meta name="keywords" content="ozdenui, OzdenUI, OzdenUI for Go, basic.js, Go GUI, golang GUI, desktop window, Go UI library, no HTML, no CSS">
+    <meta name="author" content="Buğra Özden">
+    <meta name="theme-color" content="#0D1311">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <!-- LANGUAGES: The same page in English (https://bug7a.github.io/ozdenui-go/) and in Turkish (?lang=tr).
+         canonical is added by js/site.js: it is different for each language. -->
+    <link rel="canonical" href="https://bug7a.github.io/ozdenui-go/">
+    <link rel="alternate" hreflang="en" href="https://bug7a.github.io/ozdenui-go/">
+    <link rel="alternate" hreflang="tr" href="https://bug7a.github.io/ozdenui-go/?lang=tr">
+    <link rel="alternate" hreflang="x-default" href="https://bug7a.github.io/ozdenui-go/">
+
+    <!-- SEO: The page has two languages at the same address: ?lang=tr / ?lang=en (js/site.js, the default one has no ?lang).
+         The published address is CONFIG.siteURL (js/config.js): js/site.js sets canonical, hreflang and og:url with it.
+         The address is also written below (canonical, hreflang, og:url, og:image): link previews do not run JavaScript.
+         The <noscript> part and the JSON-LD are made from js/texts.js: keep them the same when the texts change. -->
+
+    <!-- SOCIAL (link preview) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="OzdenUI">
+    <meta property="og:title" content="OzdenUI for Go – Modern desktop windows, in plain Go">
+    <meta property="og:description" content="OzdenUI for Go opens a small, modern window of its own from Go: boxes, texts, buttons and the 83 ready components of basic.js, each with its own Go type. Only Go: no JavaScript, no HTML, no front-end build. The built program is one file.">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="tr_TR">
+    <meta property="og:url" content="https://bug7a.github.io/ozdenui-go/">
+    <meta property="og:image" content="https://bug7a.github.io/ozdenui-go/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="OzdenUI for Go – Modern desktop windows, in plain Go">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- STRUCTURED DATA (schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "OzdenUI for Go",
+        "description": "OzdenUI for Go opens a small, modern window of its own from Go: boxes, texts, buttons and the 83 ready components of basic.js, each with its own Go type. Only Go: no JavaScript, no HTML, no front-end build. The built program is one file.",
+        "codeRepository": "https://github.com/bug7a/ozdenui-go",
+        "programmingLanguage": "Go",
+        "runtimePlatform": "Go 1.22+",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "isAccessibleForFree": true,
+        "inLanguage": [
+            "en",
+            "tr"
+        ],
+        "keywords": "Go GUI, desktop window, basic.js",
+        "author": {
+            "@type": "Person",
+            "name": "Buğra Özden",
+            "url": "https://bug7a.github.io/",
+            "sameAs": [
+                "https://github.com/bug7a/",
+                "https://www.linkedin.com/in/bugra-ozden/"
+            ]
+        }
+    }
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><!-- The juniper of the logo of OzdenUI FOR GO -->
+
+    <!-- LIBRARY FILES (the basic folder of the repository; _make-standalone.sh makes a copy that works alone) -->
+    <link rel="preload" href="basic/font/open-sans/OpenSans-Regular.ttf" as="font" crossorigin="anonymous">
+    <link rel="preload" href="basic/font/open-sans/OpenSans-Bold.ttf" as="font" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="basic/basic.min.css">
+    <script src="basic/basic.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="basic/scroll-bar.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- COMPONENT FILES -->
+    <script src="comp/components.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- SITE FILES -->
+    <script src="js/config.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/texts.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/samples.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/image-sizes.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/theme.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/code-highlight.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/shots.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/header.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- SECTION FILES -->
+    <script src="js/sections/hero.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/code.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/why.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/components.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/own.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/dialogs.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/examples.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/fit.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/start.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/sections/footer.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/site.js" type="text/javascript" charset="utf-8"></script>
+
+    <!--
+
+    /* Bismillah */
+
+    OZDENUI FOR GO WEBSITE
+    - The page of the Go module OzdenUI for Go (ozdenui-go): the sister of the site of OzdenUI for Python.
+    - The whole page is drawn with basic.js. The Go code is shown, not run; the pictures are real windows
+      (tools/make-images.sh makes them from the examples of the module).
+    - Texts: js/texts.js  |  Code: js/samples.js  |  Settings: js/config.js  |  Colors: js/theme.js
+    - The flow of the page: js/site.js -> SiteApp.build()
+
+    Started Date: November 2026
+    Webpage: https://bug7a.github.io/ozdenui-go/
+
+    Copyright 2026 Bugra Ozden <bugra.ozden@gmail.com> (https://bug7a.github.io/)
+    Licensed under the Apache License, Version 2.0
+    SPDX-License-Identifier: Apache-2.0
+
+    -->
+
+    <style>
+
+        /* The text shown when JavaScript is off */
+        .noscript-box {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            height: 100%;
+            overflow: auto; /* WHY: basic.css turns off the scrolling of <body>. */
+            width: 100%;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            font-family: opensans;
+            font-size: 16px;
+            line-height: 1.6;
+            color: rgba(0, 0, 0, 0.82);
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <noscript>
+        <div class="noscript-box">
+            <div style="max-width: 760px; margin: 0 auto; text-align: left;">
+                <p><a href="?lang=tr" hreflang="tr" lang="tr" style="color: inherit;">Türkçe</a></p>
+                <h1>Modern desktop windows, in&nbsp;plain Go</h1>
+                <p>Write the window in Go: boxes, texts, buttons and ready components appear in a small window of its own. Only Go: no JavaScript, no HTML, no CSS, no front-end build. The built program is one file.</p>
+                <p>v0.1.0 · experimental · Go 1.22+ · tested on macOS · 83 components, each with its own Go type · basic.js inside: about 3.5 MB, no internet · no Node, no npm · Apache 2.0</p>
+                <p><code>go get github.com/bug7a/ozdenui-go</code></p>
+                <h2>A counter in a few lines</h2>
+                <p>Groups place the objects for you, and a Go function given to a button runs when it is clicked.</p>
+                <ul>
+                    <li><b>A group is a function.</b> The objects made in the function of a group go into it: the shape of the code is the shape of the window.</li>
+                    <li><b>Values in Go.</b> label.SetText() changes the window; field.Text() and box.Checked() are read in Go, with no question to the window.</li>
+                    <li><b>One goroutine, no locks.</b> start(), an event and a timer run one at a time. The changes of a task go to the window together, when it ends.</li>
+                </ul>
+                <h2>One file, typed, easy to read</h2>
+                <ul>
+                    <li><b>One file, offline.</b> basic.js and its components are inside the program (go:embed, about 3.5 MB). go build makes one file to share: no internet, no Node, no front-end build.</li>
+                    <li><b>Types your editor knows.</b> Every component has its own Props struct, made from the kit: the editor offers the fields with their defaults, and a wrong field name does not compile.</li>
+                    <li><b>Code that reads like the window.</b> Groups are functions, the names are those of basic.js, events are Go functions. A wrong name in Set() is told in the terminal with the line of your program.</li>
+                    <li><b>Goroutines welcome.</b> A slow job runs in a goroutine of its own and the window does not wait. ui.Do() brings its result back to the objects.</li>
+                </ul>
+                <h2>Ready components, typed in Go</h2>
+                <p>SmartButton, TextField, EmailField, PasswordField, NumberField, UrlField, PhoneField, CurrencyField, TextAreaField, SearchInput, TagInput, CheckBox, Toggle, RadioButton, SelectBox, Slider, RangeSlider, SliderField, Stepper, DatePicker, TimePicker, ColorPicker, FilePicker, ProgressBar, StepBar, ItemList, SortableList, SmartTable, DataTable, TreeView, Tabs, Accordion, GridGroup, ScrollArea, Splitter, SidePanel, GraphBox, Gauge, LogView, ImageView, MarkdownView, JsonView, JsonEditor, CodeEditor, Canvas, ChatView, WebView, MenuBar, ToolBar, StatusBar, ContextMenu, Tooltip and the others of the 83. Each one is a function with its own Props struct; ui.Component() makes any of them by its name.</p>
+                <h2>A component of your own, in plain Go</h2>
+                <p>A function that makes its objects in a group is a component: use it again and again, change it with its methods, share it as a package. No JavaScript is needed.</p>
+                <h2>A dialog that returns its answer</h2>
+                <p>ui.Confirm() waits for the answer and returns it, like any function. The window keeps working meanwhile: timers run and the page is drawn.</p>
+                <h2>Twenty-one small programs</h2>
+                <p>A small code editor, A small Markdown editor, A small JSON viewer, CSV viewer, A chat, Charts, Image viewer, A job and its log, A form, Settings, To do, Notes, Dialogs, Gallery, The minimal look, Calculator, The basic objects, Counter, Greeting, Clock and Catch the dots, in the examples folder of the repository.</p>
+                <h2>Where it fits</h2>
+                <p>A good choice for a small tool or a command line program that needs a window, for a tool given to your team as one file, and for a modern look without HTML, CSS or a front-end build. For more than one window (v0.1.0 has one window for a program), a large desktop application (Fyne or Gio), a front end written in HTML and JavaScript (Wails) or a web application for many users, something else is better.</p>
+                <h2>Three steps</h2>
+                <ol>
+                    <li><b>Get it.</b> go get github.com/bug7a/ozdenui-go. On macOS it needs cgo: the command line tools of Xcode. On Windows and Linux no C compiler is needed.</li>
+                    <li><b>Write start(page).</b> Make the objects of the window in it. Groups place them; a Go function runs on a click.</li>
+                    <li><b>Run it.</b> go run . opens a window; go build makes one file to share.</li>
+                </ol>
+                <p>Go 1.22+. Tested on macOS: the window is the web view of the system (WKWebView). On Windows and Linux it is an app window of Edge or Chrome; these two are checked by the tests of the repository, not yet by hand.</p>
+                <p>OzdenUI for Go is open source under the Apache 2.0 license: <a href="https://github.com/bug7a/ozdenui-go" style="color: inherit;">GitHub</a>. The family: <a href="https://bug7a.github.io/ozdenui-python/" style="color: inherit;">OzdenUI for Python</a>, <a href="https://bug7a.github.io/basic.js/" style="color: inherit;">basic.js</a>, <a href="https://bug7a.github.io/js-components/" style="color: inherit;">the components</a>. This page is built with basic.js. Developed with the help of Claude Code (Anthropic). © 2026 Buğra Özden.</p>
+            </div>
+        </div>
+    </noscript>
+
+</body>
+
+</html>
