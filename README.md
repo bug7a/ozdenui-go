@@ -4,6 +4,8 @@ A small, modern window of its own in Go, made of [basic.js](https://bug7a.github
 components of the OzdenUI kit. Only Go: no JavaScript, no HTML, no CSS, no build step of a front end. Your Go code
 makes the objects, and a window shows them. The built program is one file.
 
+The site: https://bug7a.github.io/ozdenui-go/ (English and Turkish).
+
 <p align="center">
   <img src="images/gallery.png" width="800" alt="The window of examples/gallery: buttons, fields, choices, a list, a table, a chart and tabs of the OzdenUI kit">
 </p>
