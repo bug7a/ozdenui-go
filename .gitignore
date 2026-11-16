@@ -1,4 +1,5 @@
 /pictures/
+/handbook/_check*/
 _notes*.md
 *.test
 .DS_Store

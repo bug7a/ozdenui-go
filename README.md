@@ -4,7 +4,9 @@ A small, modern window of its own in Go, made of [basic.js](https://bug7a.github
 components of the OzdenUI kit. Only Go: no JavaScript, no HTML, no CSS, no build step of a front end. Your Go code
 makes the objects, and a window shows them. The built program is one file.
 
-The site: https://bug7a.github.io/ozdenui-go/ (English and Turkish).
+The site: https://bug7a.github.io/ozdenui-go/ and the handbook, ten short chapters with programs that run:
+[English](https://bug7a.github.io/ozdenui-go/handbook/) ([Markdown](handbook/README.md)),
+[Türkçe](https://bug7a.github.io/ozdenui-go/handbook/?lang=tr) ([Markdown](handbook/turkce/README.md)).
 
 <p align="center">
   <img src="images/gallery.png" width="800" alt="The window of examples/gallery: buttons, fields, choices, a list, a table, a chart and tabs of the OzdenUI kit">
@@ -215,6 +217,7 @@ In a dark window every component takes its dark look by itself, and the plain ob
 ```
 go test ./...                    # the checks; TestWindow plays a real page in a hidden Chrome
 checks/look-all.sh               # a picture of every example, light and dark (pictures/)
+checks/handbook.sh               # every whole program of the handbook, built and drawn (pictures/handbook/)
 ./update-web.sh --commit HEAD    # the kit copy (web/) from the js-components repository, then kit_gen.go
 go run ./internal/gen            # kit_gen.go again, after a change of internal/gen/spec.json
 ```

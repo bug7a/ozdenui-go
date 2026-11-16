@@ -103,9 +103,9 @@ HeroSection.SLIDE_SECONDS = 5;
 HeroSection.MOTION_SECONDS = 0.25;
 HeroSection.FRAME_SHADOW = "0px 30px 80px rgba(0, 0, 0, 0.5), 0px 0px 0px 1px rgba(255, 255, 255, 0.08)";
 HeroSection.THUMB_SHADOW = "0px 6px 18px rgba(0, 0, 0, 0.45)";
-HeroSection.THUMB_OPEN_SHADOW = "0px 0px 0px 4px rgba(66, 115, 173, 0.35), 0px 10px 24px rgba(0, 0, 0, 0.5)";
+HeroSection.THUMB_OPEN_SHADOW = "0px 0px 0px 4px rgba(121, 212, 253, 0.3), 0px 10px 24px rgba(0, 0, 0, 0.5)";
 HeroSection.THUMB_WIDTH = 112;       // px: a small picture under the frame (smaller on a narrow screen)
-HeroSection.THUMB_LINE = 3;          // px: its line (the line of the open one is the blue of the logo)
+HeroSection.THUMB_LINE = 3;          // px: its line (the line of the open one is the sky blue of the logo)
 HeroSection.THUMB_ZOOM = 1.12;       // the picture is larger than its box, in its middle: WHY the edges of a window
                                      //     picture (its frame, its scroll bar, its status bar) made the line look uneven
 HeroSection.THUMB_LIFT = 4;          // px: the open one stands a little higher
@@ -141,7 +141,7 @@ HeroSection.createSlides = function (width) {
     const paintThumbs = function () {
         thumbs.forEach(function (thumb) {
             const isOpen = (thumb.file === pages.value);
-            thumb.borderColor = isOpen ? SITE.ACCENT : SITE.ON_DARK_LINE;
+            thumb.borderColor = isOpen ? SITE.ACCENT_ON_DARK : SITE.ON_DARK_LINE;
             thumb.elem.style.transform = isOpen ? "translateY(-" + HeroSection.THUMB_LIFT + "px)" : "translateY(0px)";
             thumb.elem.style.boxShadow = isOpen ? HeroSection.THUMB_OPEN_SHADOW : HeroSection.THUMB_SHADOW;
             // WHY the picture and not the box: a box that is not opaque showed what is behind it
@@ -283,7 +283,7 @@ HeroSection.createThumb = function (slide, width, height, open, paint) {
         const timeTop = height - line * 2 - HeroSection.TIME_BAR;
         thumb.timeTrack = Box({ left: 0, top: timeTop, width: width - line * 2, height: HeroSection.TIME_BAR, color: HeroSection.TIME_TRACK });
         thumb.timeTrack.visible = 0;
-        thumb.timeBar = Box({ left: 0, top: timeTop, width: width - line * 2, height: HeroSection.TIME_BAR, color: SITE.ACCENT });
+        thumb.timeBar = Box({ left: 0, top: timeTop, width: width - line * 2, height: HeroSection.TIME_BAR, color: SITE.ACCENT_ON_DARK });
         thumb.timeBar.elem.style.transformOrigin = "left center";
         thumb.timeBar.visible = 0;
     });

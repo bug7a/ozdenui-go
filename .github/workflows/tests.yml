@@ -1,5 +1,5 @@
 # Every push: the tests (with a real page in a hidden browser), then a picture of every example, light and dark,
-# on macOS, Windows and Linux.
+# on macOS, Windows and Linux; the programs of the handbook once, on Linux.
 name: tests
 
 on:
@@ -33,6 +33,9 @@ jobs:
       - name: Every example in a hidden browser
         shell: bash
         run: checks/look-all.sh pictures
+      - name: Every program of the handbook in a hidden browser
+        if: matrix.os == 'ubuntu-latest' && matrix.go == 'stable'
+        run: checks/handbook.sh pictures/handbook
       - name: The pictures of the windows
         if: always()
         uses: actions/upload-artifact@v4

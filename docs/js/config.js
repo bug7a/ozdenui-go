@@ -38,7 +38,7 @@ const CONFIG = {
     basicjsURL: "https://bug7a.github.io/basic.js/", // the site of basic.js
     // The handbook of the module: a page of this site (Ex: "handbook/"); its language follows the page.
     // "": there is none yet, and its buttons and links are hidden.
-    handbookURL: "",
+    handbookURL: "handbook/",
     componentsURL: "https://bug7a.github.io/js-components/",
     pythonURL: "https://bug7a.github.io/ozdenui-python/", // OzdenUI for Python, the twin of this module
     authorURL: "https://bug7a.github.io/",

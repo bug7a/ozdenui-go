@@ -7,7 +7,7 @@ SiteHeader - v26.11 (OzdenUI for Go Website; from the site of OzdenUI for Python
 - Sayfanın üstünde sabit duran koyu menü çubuğu. (Kaydırılan kutunun dışındadır.)
 - Geniş ekranda bölüm bağlantıları görünür; dar ekranda menü düğmesi bir açılır liste açar.
 - Kaydırınca altına ince bir çizgi gelir.
-- The logo of OzdenUI (the juniper, "OzdenUI", "FOR GO"); the Handbook button only when CONFIG.handbookURL is given (the
+- The logo of OzdenUI (the borage, "OzdenUI", "FOR GO"); the Handbook button only when CONFIG.handbookURL is given (the
   handbook page of the site, in the language of the page); the GitHub button only when CONFIG.githubURL is given (on a
   phone they are items of the menu).
 - 2026-11-05 (the user, as in the site of the Tauri template): with the GitHub button the bar was 375 px wide on a
@@ -24,9 +24,9 @@ SPDX-License-Identifier: Apache-2.0
 
 "use strict";
 
-const LOGO_HEIGHT = 76;             // px: the logo in the bar (68 px high): the top of the juniper is out of the window
+const LOGO_HEIGHT = 76;             // px: the logo in the bar (68 px high): the borage is a little taller than the bar
 const LOGO_HEIGHT_MOBILE = 62;      // (a 60 px bar)
-const LOGO_WORDS_MIDDLE = 70 / 130; // the middle of "OzdenUI" in the drawing, from its top (measured)
+const LOGO_WORDS_MIDDLE = 58 / 130; // the middle of "OzdenUI" in the drawing, from its top (measured)
 
 // Default values:
 const SiteHeaderDefaults = {
@@ -146,13 +146,13 @@ const SiteHeader = function (params = {}) {
         that.clipContent = 0;
 
             // GROUP: Logo
-            // WHY larger than the bar: the words of the logo were small; they stand beside the links (a little higher than
-            //     the middle of the drawing), and the top of the juniper goes out of the window
+            // WHY larger than the bar: the words of the logo were small; they stand beside the links (a little lower than
+            //     the middle of the drawing), and the borage goes a little out of the bar
             const logoHeight = L.mobile ? LOGO_HEIGHT_MOBILE : LOGO_HEIGHT;
             const brand = HGroup({ width: "auto", height: "auto", align: "left center", gap: 10 });
             brand.elem.style.cursor = "pointer";
             brand.elem.style.flexShrink = "0";
-            brand.elem.style.transform = "translateY(-" + Math.round(logoHeight * (LOGO_WORDS_MIDDLE - 0.5)) + "px)";
+            brand.elem.style.transform = "translateY(" + Math.round(logoHeight * (0.5 - LOGO_WORDS_MIDDLE)) + "px)";
 
                 SITE.logo(logoHeight);
 
