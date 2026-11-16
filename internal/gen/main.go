@@ -175,7 +175,7 @@ func componentFiles() map[string]string {
 func sourceOf(name string, files map[string]string) string {
 	text, err := os.ReadFile(filepath.Join(webFolder, files[name]))
 	check(err)
-	source := string(text)
+	source := strings.ReplaceAll(string(text), "\r\n", "\n") // a checkout of Windows
 	if parent := parentOf.FindStringSubmatch(source); parent != nil && parent[1] != name && files[parent[1]] != "" {
 		source += "\n" + sourceOf(parent[1], files)
 	}
