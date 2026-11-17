@@ -13,8 +13,10 @@ Go 1.22 ya da daha yenisi gerekir.
 - **macOS:** pencere, programınızın içindeki sistemin web görünümüdür (WKWebView). cgo gerektirir, bu yüzden Xcode'un
   komut satırı araçları kurulu olmalıdır (`xcode-select --install`). İlk derleme yaklaşık on saniye sürer ve web
   görünümünün C kodundan uyarılar yazabilir: bunlar hata değildir, sonraki derlemeler hızlıdır.
-- **Windows, Linux:** pencere, Edge'in ya da Chrome'un bir uygulama penceresidir: adres çubuğu yok, sekme yok. C
-  derleyicisi gerekmez. Windows'ta Edge her zaman vardır.
+- **Windows:** pencere, programınızın içindeki sistemin web görünümüdür (WebView2). C derleyicisi gerekmez. WebView2
+  her Windows 11'de ve çoğu Windows 10'da vardır; yoksa pencere Edge'in ya da Chrome'un bir uygulama penceresidir.
+- **Linux:** pencere, Edge'in ya da Chrome'un bir uygulama penceresidir: adres çubuğu yok, sekme yok. C derleyicisi
+  gerekmez.
 
 Derlenen program (`go build`) tek bir dosyadır: pencerenin sayfası ve bileşenler onun içindedir.
 

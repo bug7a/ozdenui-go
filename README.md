@@ -60,14 +60,15 @@ func add(step int) {
 go get github.com/bug7a/ozdenui-go
 ```
 
-v0.1, experimental: made and tested on macOS; Windows and Linux use the window of Edge or Chrome and are checked by
+v0.2, experimental: tested by hand on macOS and Windows 11; Linux uses the window of Edge or Chrome and is checked by
 the tests of the repository, not yet by hand. Go 1.22 or newer.
 
 - **macOS:** the window is the web view of the system (WKWebView), inside the program. It needs cgo: the command line
   tools of Xcode (`xcode-select --install`). The first build takes about ten seconds and may print warnings of the web
   view's C code; the next ones are fast.
-- **Windows, Linux:** the window is an app window of Edge or Chrome (no address bar, no tabs): nothing to install
-  on Windows, where Edge is always there. No C compiler is needed.
+- **Windows:** the window is the web view of the system (WebView2, in every Windows 11 and in most Windows 10), inside
+  the program. No C compiler is needed. A computer without WebView2 gets the app window of Edge or Chrome.
+- **Linux:** the window is an app window of Edge or Chrome (no address bar, no tabs). No C compiler is needed.
 
 **With an AI assistant** (Claude Code, Codex, Cursor, Copilot...): OzdenUI is new, so an assistant does not know it
 yet. One command writes its rules (how a program is made, the layout, the events, the components, the mistakes to
@@ -210,11 +211,13 @@ In a dark window every component takes its dark look by itself, and the plain ob
 | `job-log` | a goroutine that tells its progress |
 | `chat`, `gallery`, `minimal-theme` | the bigger ones |
 
-## Limits of v0.1
+## Limits of v0.2
 
-- macOS is the tested system. Windows and Linux open the app window of Edge or Chrome (with none of them: a tab of
-  the default browser); the web view of the system there is a later step (`-tags ozdenui_webview` builds it with a C
+- macOS and Windows are tested by hand. Linux opens the app window of Edge or Chrome (with none of them: a tab of the
+  default browser); the web view of the system there is a later step (`-tags ozdenui_webview` builds it with a C
   compiler today, untested).
+- Windows: the window is sharp on the scale of the main screen; on a second screen with another scale it is
+  stretched by the system.
 - One window for a program.
 - A callback of the kit that must answer at once (a validator, `createItemView`) can not be a Go function: the answer
   of the program comes after the page has drawn.
@@ -243,6 +246,7 @@ JavaScript they stand on.
 ## License
 
 Apache 2.0. Copyright 2026 Buğra Özden. basic.js and the components of the kit are in `web/` (Apache 2.0, the same
-author); the window of macOS is [webview](https://github.com/webview/webview_go) (MIT).
+author); the window of macOS is [webview](https://github.com/webview/webview_go) (MIT), the window of Windows is
+[go-webview2](https://github.com/jchv/go-webview2) (MIT).
 
 Developed with the help of Claude Code (Anthropic).

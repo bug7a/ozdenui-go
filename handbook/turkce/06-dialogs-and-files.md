@@ -49,7 +49,7 @@ hint := ui.ShowHint(save, "Çalışıyor", 0, "bottom") // 0: hint.Remove() ça�
 
 - `Trigger: "click"` alan bir `Tooltip` bir popover'dır: hedefine bir tıklama onu açar ve dışarıya bir tıklamaya kadar
   açık kalır. `HintPosition` onun yanıdır: `"top"`, `"bottom"`, `"left"`, `"right"`.
-- v0.1'de bir balon bir metin gösterir. Sizin nesnelerinizi tutan bir balon henüz yok.
+- v0.2'de bir balon bir metin gösterir. Sizin nesnelerinizi tutan bir balon henüz yok.
 
 ## Sistemin dosya pencereleri
 

@@ -49,7 +49,7 @@ hint := ui.ShowHint(save, "Working", 0, "bottom") // 0: it stays until hint.Remo
 
 - A `Tooltip` with `Trigger: "click"` is a popover: a click on its target opens it, and it stays until a click outside.
   `HintPosition` is its side: `"top"`, `"bottom"`, `"left"`, `"right"`.
-- In v0.1 a bubble shows a text. A bubble that holds objects of your own is not there yet.
+- In v0.2 a bubble shows a text. A bubble that holds objects of your own is not there yet.
 
 ## The file dialogs of the system
 

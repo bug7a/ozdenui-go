@@ -223,10 +223,12 @@ GOOS=windows GOARCH=amd64 go build .      # a program for Windows, built on anot
 The page, basic.js and the components are embedded (`go:embed`), so the built program needs no other file. A small
 program is about 15 MB. On macOS the build needs cgo (the web view of the system); Windows and Linux need no C compiler.
 
-## Limits of v0.1
+## Limits of v0.2
 
-- macOS is the tested system. Windows and Linux open the app window of Edge or Chrome (with none of them, a tab of the
-  default browser); they are checked by the tests of the repository, not yet by hand.
+- macOS and Windows are tested by hand. Linux opens the app window of Edge or Chrome (with none of them, a tab of the
+  default browser); it is checked by the tests of the repository, not yet by hand.
+- On Windows the window is sharp on the scale of the main screen; on a second screen with another scale the system
+  stretches it.
 - One window for a program.
 - A callback that must answer at once can not be a Go function, because the answer comes later: a validator, a
   function that builds the objects of a row (`createItemView`). Format the values of a table in Go; the numbers of a

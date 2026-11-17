@@ -224,10 +224,11 @@ GOOS=windows GOARCH=amd64 go build .      # Windows için bir program, başka bi
 Sayfa, basic.js ve bileşenler gömülüdür (`go:embed`); bu yüzden derlenmiş program başka bir dosya istemez. Küçük bir
 program yaklaşık 15 MB'tır. macOS'ta derleme cgo ister (sistemin web görünümü); Windows ve Linux C derleyicisi istemez.
 
-## v0.1'in sınırları
+## v0.2'nin sınırları
 
-- Denenen sistem macOS'tur. Windows ve Linux, Edge'in ya da Chrome'un uygulama penceresini açar (hiçbiri yoksa
-  varsayılan tarayıcının bir sekmesini); onları deponun testleri denetler, elle henüz denenmediler.
+- macOS ve Windows elle denendi. Linux, Edge'in ya da Chrome'un uygulama penceresini açar (hiçbiri yoksa varsayılan
+  tarayıcının bir sekmesini); onu deponun testleri denetler, elle henüz denenmedi.
+- Windows'ta pencere ana ekranın ölçeğinde nettir; başka ölçekte ikinci bir ekranda sistem onu gerer.
 - Bir program için tek pencere.
 - Hemen cevap vermesi gereken bir callback bir Go fonksiyonu olamaz, çünkü cevap sonra gelir: bir doğrulayıcı, bir
   satırın nesnelerini kuran bir fonksiyon (`createItemView`). Bir tablonun değerlerini Go'da biçimlendirin; bir

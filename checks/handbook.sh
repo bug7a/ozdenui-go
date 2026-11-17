@@ -36,7 +36,9 @@ for chapter in sorted(list(root.glob("*.md")) + list(root.glob("turkce/*.md"))):
     for number, code in enumerate([block for block in blocks if "package main" in block], start=1):
         folder = work / (name.replace("/", "-") + "-" + str(number))
         folder.mkdir(parents=True)
-        (folder / "main.go").write_text(code, encoding="utf-8")
+        # WHY newline: on Windows text files are written with CRLF, and gofmt fails them
+        with open(folder / "main.go", "w", encoding="utf-8", newline="\n") as file:
+            file.write(code)
 PY
 
 FAILED=0
@@ -59,5 +61,7 @@ for folder in "$WORK"/*/; do
     fi
 done
 rm -rf "$WORK"
+# WHY: no programs found (no python3, a wrong chapter name) is not a pass
+[ "$COUNT" = "0" ] && FAILED=1 && echo "FAIL no programs found"
 [ "$FAILED" = "0" ] && echo "ALL PASS ($COUNT programs)" || echo "SOME FAILED"
 exit $FAILED

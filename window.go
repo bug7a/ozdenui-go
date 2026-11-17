@@ -6,8 +6,9 @@ window.go - ozdenui v0.1 (OzdenUI: basic.js for Go)
 How the window opens: the web view of the system, or the window of a browser of this computer.
 
 - macOS: the web view of the system (WKWebView), in the program itself (cgo: the command line tools of Xcode).
-- Windows and Linux, and a build without cgo: an app window of Edge or Chrome (no address bar, no tabs), which every
-  Windows has. With no such browser: a tab of the default browser.
+- Windows: the web view of the system (WebView2, window_windows.go), without cgo; without WebView2 the app window below.
+- Linux, and macOS without cgo: an app window of Edge or Chrome (no address bar, no tabs). With no such browser: a tab
+  of the default browser.
 - OZDENUI_LOOK=picture.png: no window; the page is drawn by a hidden Chrome and saved as a picture (look.go).
 
 Environment: OZDENUI_WINDOW=browser (the browser window also where the web view works), =tab (the default browser),

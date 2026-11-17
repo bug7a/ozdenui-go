@@ -13,8 +13,9 @@ It needs Go 1.22 or newer.
 - **macOS:** the window is the web view of the system (WKWebView), inside your program. It needs cgo, so the command
   line tools of Xcode must be there (`xcode-select --install`). The first build takes about ten seconds and may print
   warnings of the web view's C code: they are not errors, and the next builds are fast.
-- **Windows, Linux:** the window is an app window of Edge or Chrome: no address bar, no tabs. No C compiler is
-  needed. On Windows, Edge is always there.
+- **Windows:** the window is the web view of the system (WebView2), inside your program. No C compiler is needed.
+  WebView2 is in every Windows 11 and in most Windows 10; without it, the window is an app window of Edge or Chrome.
+- **Linux:** the window is an app window of Edge or Chrome: no address bar, no tabs. No C compiler is needed.
 
 The built program (`go build`) is one file: the page of the window and the components are inside it.
 
