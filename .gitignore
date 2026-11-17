@@ -3,3 +3,7 @@
 _notes*.md
 *.test
 .DS_Store
+/checks/window-check/*.exe
+/checks/window-check/*.png
+/checks/window-check/*.log
+/checks/window-check/*.txt
