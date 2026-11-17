@@ -71,9 +71,10 @@ func openHeadless(app *application, address string) error {
 		return err
 	}
 	defer os.RemoveAll(profile)
-	process := exec.Command(browser, "--headless=new", "--remote-debugging-port=0", "--user-data-dir="+profile,
+	arguments := append([]string{"--headless=new", "--remote-debugging-port=0", "--user-data-dir=" + profile,
 		"--no-first-run", "--no-default-browser-check", "--hide-scrollbars", "--disable-gpu",
-		fmt.Sprintf("--window-size=%d,%d", app.window.Width, app.window.Height), "about:blank")
+		fmt.Sprintf("--window-size=%d,%d", app.window.Width, app.window.Height)}, profileFlags...)
+	process := exec.Command(browser, append(arguments, "about:blank")...)
 	output, err := process.StderrPipe()
 	if err != nil {
 		return err

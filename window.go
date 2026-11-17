@@ -44,6 +44,11 @@ type windowControl interface {
 
 const streamGoneAfter = 1500 * time.Millisecond // a page that does not listen this long is a closed window
 
+// WHY: Edge signed the profile of the program in with the Microsoft account of Windows on its own, and synced the
+// passwords, the history and the tabs of the user into it, with a dialog over the window. (One flag of
+// --disable-features: a second one would replace it.)
+var profileFlags = []string{"--disable-sync", "--disable-features=msImplicitSignin"}
+
 // Opens the window and returns when it is closed.
 func openWindow(app *application, address string) {
 	mode := os.Getenv("OZDENUI_WINDOW")
@@ -90,9 +95,10 @@ func openBrowserWindow(app *application, address string, isTab bool) {
 		// WHY a profile of the program: the browser is a process of its own then, which ends with the window (a browser
 		//      that was already open would take the window into its process, with its tabs and its size)
 		profile := filepath.Join(cacheFolder(), "browser-profile-"+programName())
-		window.process = exec.Command(browser,
-			"--app="+address, fmt.Sprintf("--window-size=%d,%d", app.window.Width, app.window.Height),
-			"--user-data-dir="+profile, "--no-first-run", "--no-default-browser-check")
+		arguments := append([]string{
+			"--app=" + address, fmt.Sprintf("--window-size=%d,%d", app.window.Width, app.window.Height),
+			"--user-data-dir=" + profile, "--no-first-run", "--no-default-browser-check"}, profileFlags...)
+		window.process = exec.Command(browser, arguments...)
 		if err := window.process.Start(); err != nil {
 			browser = ""
 		} else {

@@ -22,6 +22,7 @@ package ozdenui
 import (
 	"path/filepath"
 	"syscall"
+	"unsafe"
 
 	webview2 "github.com/jchv/go-webview2"
 	"github.com/jchv/go-webview2/webviewloader"
@@ -39,7 +40,17 @@ var (
 	user32                        = syscall.NewLazyDLL("user32.dll")
 	setProcessDpiAwarenessContext = user32.NewProc("SetProcessDpiAwarenessContext")
 	getDpiForWindow               = user32.NewProc("GetDpiForWindow")
+	getWindowRect                 = user32.NewProc("GetWindowRect")
+	systemParametersInfo          = user32.NewProc("SystemParametersInfoW")
+	setWindowPos                  = user32.NewProc("SetWindowPos")
 )
+
+const (
+	getWorkArea = 0x0030                   // SPI_GETWORKAREA: the screen without the taskbar
+	moveOnly    = 0x0001 | 0x0004 | 0x0010 // SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE
+)
+
+type windowRect struct{ left, top, right, bottom int32 }
 
 type webview2Window struct {
 	view  webview2.WebView
@@ -88,9 +99,27 @@ func openNativeWindow(app *application, address string) bool {
 	window := &webview2Window{view: view, scale: windowScale(view)}
 	app.control = window
 	view.SetSize(int(float64(app.window.Width)*window.scale+0.5), int(float64(app.window.Height)*window.scale+0.5), webview2.HintNone)
+	centerWindow(uintptr(view.Window()))
 	view.Navigate(address)
 	view.Run()
 	return true
+}
+
+// WHY again: the web view centers the window by the size it was made with, before the scale of the screen made it
+// larger (at 150 % it stood 130 px right of the middle). The middle of the work area, as the window of a browser
+// (bridge.js).
+func centerWindow(hwnd uintptr) {
+	rect := windowRect{}
+	if ok, _, _ := getWindowRect.Call(hwnd, uintptr(unsafe.Pointer(&rect))); ok == 0 {
+		return
+	}
+	area := windowRect{}
+	if ok, _, _ := systemParametersInfo.Call(getWorkArea, 0, uintptr(unsafe.Pointer(&area)), 0); ok == 0 {
+		return
+	}
+	left := area.left + (area.right-area.left-(rect.right-rect.left))/2
+	top := area.top + (area.bottom-area.top-(rect.bottom-rect.top))/2
+	_, _, _ = setWindowPos.Call(hwnd, 0, uintptr(max(left, area.left)), uintptr(max(top, area.top)), 0, 0, moveOnly)
 }
 
 // The scale of the screen of the window (1.5 for 150 %); 1 on a Windows older than 10 (1607).

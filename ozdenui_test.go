@@ -27,6 +27,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"regexp"
+	"slices"
 	"strings"
 	"testing"
 	"time"
@@ -156,6 +157,28 @@ func TestKitTable(t *testing.T) {
 }
 
 // The files of the module start with Bismillah and carry the notice (the rule of the project).
+// The browser windows of Windows: Edge must not sign the profile of a program in with the account of the user, nor
+// offer to translate its page, and its window opens in the middle of the screen.
+func TestBrowserStaysPrivate(t *testing.T) {
+	if !slices.Contains(profileFlags, "--disable-sync") || !slices.Contains(profileFlags, "--disable-features=msImplicitSignin") {
+		t.Errorf("profileFlags: %v", profileFlags)
+	}
+	for _, name := range []string{"window.go", "look.go"} {
+		content, _ := os.ReadFile(name)
+		if !strings.Contains(string(content), "profileFlags...)") {
+			t.Errorf("%s does not give profileFlags to the browser", name)
+		}
+	}
+	page, _ := os.ReadFile("web/index.html")
+	if !strings.Contains(string(page), `<meta name="google" content="notranslate">`) {
+		t.Error("web/index.html: no notranslate")
+	}
+	bridge, _ := os.ReadFile("web/bridge.js")
+	if !strings.Contains(string(bridge), "centerWindow();") {
+		t.Error("web/bridge.js: the window of a browser is not centered")
+	}
+}
+
 func TestHeaders(t *testing.T) {
 	files, _ := os.ReadDir(".")
 	for _, file := range files {

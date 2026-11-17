@@ -38,7 +38,7 @@ const TEXTS = {
         copyFailed: "The code could not be copied.",
 
         // HERO
-        heroEyebrow: "v{version} · experimental · Go {go}+ · tested\u00A0on\u00A0macOS", // WHY \u00A0: on a phone "tested on macOS" goes to the second line together
+        heroEyebrow: "v{version} · experimental · Go {go}+ · tested\u00A0on\u00A0macOS\u00A0and\u00A0Windows", // WHY \u00A0: on a phone "tested on macOS and Windows" goes to the second line together
         heroTitle: "Modern desktop windows, in\u00A0plain\u00A0Go", // WHY \u00A0: the line breaks before "in", and "Go" is never alone on a line
         heroLead: "Write the window in Go: boxes, texts, buttons and ready components appear in a small window of its own. Only Go: no JavaScript, no HTML, no CSS, no front-end build. The built program is one file.",
         heroPrimary: "Get started",
@@ -228,8 +228,8 @@ const TEXTS = {
         copyFailed: "Kod kopyalanamadı.",
 
         // HERO
-        heroEyebrow: "v{version} · deneysel · Go {go}+ · macOS'ta\u00A0denendi",
-        heroTitle: "Düz Go ile modern masaüstü\u00A0pencereleri",
+        heroEyebrow: "v{version} · deneysel · Go {go}+ · macOS'ta\u00A0ve\u00A0Windows'ta\u00A0denendi",
+        heroTitle: "Düz Go ile modern masaüstü pencereleri",
         heroLead: "Pencereyi Go ile yazın: kutular, metinler, düğmeler ve hazır bileşenler kendi küçük penceresinde görünür. Yalnız Go: JavaScript, HTML, CSS ve ön yüz derlemesi yok. Derlenen program tek bir dosyadır.",
         heroPrimary: "Başlayın",
         heroSecondary: "Örneklere bakın",
