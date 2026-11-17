@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/logo-dark.png">
+    <img src="images/logo.png" width="342" alt="OzdenUI for Go">
+  </picture>
+</p>
+
 # OzdenUI for Go
 
 A small, modern window of its own in Go, made of [basic.js](https://bug7a.github.io/basic.js/) objects and the
