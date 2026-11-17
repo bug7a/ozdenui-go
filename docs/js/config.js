@@ -22,7 +22,7 @@ const CONFIG = {
 
     // *** BRAND:
     brandName: "OzdenUI",
-    logoFile: "assets/ozdenui-go-dark.svg", // the logo of OzdenUI FOR GO (362 x 130), its version for the dark bar
+    logoFile: "assets/ozdenui-go-dark.svg", // the logo of OzdenUI FOR GO (342 x 132), its version for the dark bar
 
     // *** PATHS: (relative to this page)
     rootPath: "./",

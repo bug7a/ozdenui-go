@@ -24,24 +24,25 @@ SPDX-License-Identifier: Apache-2.0
 const SITE = {
 
     // *** COLORS:
-    // WHY these: the colors of the logo. The teal of "OzdenUI" (its light version) is the main action and a small mark
-    //     on a light ground; the sky blue of "OzdenUI" in its dark version is a small mark on a dark ground (the teal
-    //     is too dark there for a small text). The grounds take a breath of the green of the leaves of the borage.
+    // WHY these: the colors of the logo. A darker tone of the teal of "OzdenUI" (#027D9C; as it is, a small text on the
+    //     light ground would be under 4.5 : 1) is the main action and a small mark on a light ground; a sky blue is a
+    //     small mark on a dark ground (the teal is too dark there for a small text). The grounds take a breath of the
+    //     green of the leaves of the branch.
     DARK: "#0D1311",            // The dark sections (hero, dialogs, footer)
     DARK_SOFT: "#151C19",       // A card on a dark ground
     HEADER: "rgba(13, 19, 17, 0.9)",
     HEADER_MENU: "rgba(13, 19, 17, 0.97)",
     SLIDE_ARROW: "rgba(13, 19, 17, 0.72)",          // An arrow over a picture: dark, so it is seen on the light ones
     SLIDE_ARROW_HOVER: "rgba(13, 19, 17, 0.9)",
-    ACCENT: "#14677D",          // The teal of "OzdenUI" in the logo: the main button, the numbers of Start
+    ACCENT: "#14677D",          // A darker tone of the teal of "OzdenUI" in the logo: the main button, the numbers of Start
     ACCENT_HOVER: "#1B7A93",
     ON_ACCENT: "#FFFFFF",       // A text on the accent (6.4 : 1)
     ACCENT_TEXT: "#14677D",     // The same teal as a text on the light ground (5.8 : 1)
     ACCENT_SOFT: "#DDEBEE",     // The ground of a chip or of an icon, in that teal
-    ACCENT_ON_DARK: "#79D4FD",  // The sky blue of "OzdenUI" on a dark ground: a small mark or text there
+    ACCENT_ON_DARK: "#79D4FD",  // A sky blue on a dark ground: a small mark or text there
     ACCENT_ON_DARK_SOFT: "rgba(121, 212, 253, 0.1)",
     ACCENT_ON_DARK_LINE: "rgba(121, 212, 253, 0.28)",
-    GLOW_GREEN: "rgba(46, 107, 78, 0.34)",      // The light over the top of the hero: the leaves of the borage...
+    GLOW_GREEN: "rgba(46, 107, 78, 0.34)",      // The light over the top of the hero: the leaves of the branch...
     GLOW_BLUE: "rgba(20, 103, 125, 0.3)",       // ...and the teal of the words
     SELECTION: "rgba(20, 103, 125, 0.3)",
     BG: "#F4F5F0",              // The light ground, with a breath of the green and of the cream
@@ -166,10 +167,10 @@ SITE.icon = function (name, color, size = 18, strokeWidth = 2) {
 
 };
 
-// ICON: The logo of OzdenUI FOR GO (362 x 130: the borage, the wordmark and FOR GO)
+// ICON: The logo of OzdenUI FOR GO (342 x 132: the branch, the wordmark and FOR GO)
 SITE.logo = function (height = 26) {
 
-    Icon({ width: Math.round(height * 362 / 130), height: height, color: "transparent" });
+    Icon({ width: Math.round(height * 342 / 132), height: height, color: "transparent" });
     that.load(CONFIG.logoFile);
     that.elem.title = CONFIG.brandName;
     that.elem.style.flexShrink = "0";

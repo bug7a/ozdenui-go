@@ -31,7 +31,7 @@ const CONFIG = {
     // WHY from the address and not a parent path written here: _make-standalone.sh lists a path that leaves the folder
     //     in the code; this one is read from the address, so nothing is listed and the logo comes from the site.
     siteRootURL: new URL(".", location.href).href.replace(/handbook\/$/, ""),
-    logoFile: "", // written below: the logo of OzdenUI FOR GO in assets/ of the site (362 x 130, its version for a light ground)
+    logoFile: "", // written below: the logo of OzdenUI FOR GO in assets/ of the site (342 x 132, its version for a light ground)
     // The chapters (Markdown), relative to this page; a folder for each language
     handbookPath: "./",
     languageFolders: {

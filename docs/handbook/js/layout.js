@@ -82,8 +82,8 @@ Layout.createHeader = function () {
             Layout.logo.elem.style.cursor = "pointer";
             Layout.logo.elem.style.flexShrink = "0";
 
-                // ICON: The logo of OzdenUI FOR GO (362 x 130; the drawing is taller than the words)
-                Layout.imgLogo = Icon({ width: 134, height: 48, color: "transparent" });
+                // ICON: The logo of OzdenUI FOR GO (342 x 132; the drawing is taller than the words)
+                Layout.imgLogo = Icon({ width: 124, height: 48, color: "transparent" });
                 that.load(CONFIG.logoFile);
                 that.elem.title = CONFIG.brandName;
 
@@ -418,7 +418,7 @@ Layout.relayout = function () {
     Layout.headerRow.padding = [L.mobile ? 10 : 20, 0];
     Layout.headerRow.gap = L.mobile ? 6 : 10;
     Layout.btnMenu.visible = L.drawer ? 1 : 0;
-    Layout.imgLogo.width = L.mobile ? 106 : 134;
+    Layout.imgLogo.width = L.mobile ? 98 : 124;
     Layout.imgLogo.height = L.mobile ? 38 : 48;
     Layout.lblVersion.visible = (L.w >= 720) ? 1 : 0;
     Layout.headerSpacer.visible = L.mobile ? 0 : 1;
