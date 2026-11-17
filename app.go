@@ -37,7 +37,7 @@ import (
 )
 
 // Version is the version of the module.
-const Version = "0.2.1"
+const Version = "0.2.2"
 
 const (
 	readyTimeout    = 15 * time.Second

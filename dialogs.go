@@ -224,7 +224,7 @@ func fileDialog(kind string, options FileOptions) []string {
 	case "darwin":
 		command = exec.Command("osascript", "-e", appleScript(kind, options))
 	case "windows":
-		command = exec.Command("powershell", "-NoProfile", "-STA", "-Command", powerShell(kind, options))
+		command = withoutConsole(exec.Command("powershell", "-NoProfile", "-STA", "-Command", powerShell(kind, options)))
 	default:
 		command = zenity(kind, options)
 	}
