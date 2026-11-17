@@ -228,6 +228,9 @@ program yaklaşık 15 MB'tır. macOS'ta derleme cgo ister (sistemin web görün�
 
 - macOS ve Windows elle denendi. Linux, Edge'in ya da Chrome'un uygulama penceresini açar (hiçbiri yoksa varsayılan
   tarayıcının bir sekmesini); onu deponun testleri denetler, elle henüz denenmedi.
+- Linux'ta sistemin web görünümü (WebKitGTK) bir seçenektir: `go build -tags ozdenui_webview .`, bir C derleyicisi ve
+  `libgtk-3-dev libwebkit2gtk-4.0-dev` ile. Ubuntu 22.04'te çalışır (testler penceresini orada açar); Ubuntu 24.04 ve
+  sonrasında yalnızca webkit2gtk-4.1 var, bu yüzden orada derlenmez.
 - Windows'ta pencere ana ekranın ölçeğinde nettir; başka ölçekte ikinci bir ekranda sistem onu gerer.
 - Bir program için tek pencere.
 - Hemen cevap vermesi gereken bir callback bir Go fonksiyonu olamaz, çünkü cevap sonra gelir: bir doğrulayıcı, bir

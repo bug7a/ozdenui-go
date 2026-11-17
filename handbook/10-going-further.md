@@ -227,6 +227,9 @@ program is about 15 MB. On macOS the build needs cgo (the web view of the system
 
 - macOS and Windows are tested by hand. Linux opens the app window of Edge or Chrome (with none of them, a tab of the
   default browser); it is checked by the tests of the repository, not yet by hand.
+- The web view of the system on Linux (WebKitGTK) is a choice: `go build -tags ozdenui_webview .`, with a C compiler
+  and `libgtk-3-dev libwebkit2gtk-4.0-dev`. It works on Ubuntu 22.04 (the tests open its window there); Ubuntu 24.04
+  and newer have only webkit2gtk-4.1, so it does not build there.
 - On Windows the window is sharp on the scale of the main screen; on a second screen with another scale the system
   stretches it.
 - One window for a program.

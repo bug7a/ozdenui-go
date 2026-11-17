@@ -45,14 +45,10 @@ jobs:
           if-no-files-found: ignore
 
   # The tagged path of Linux (-tags ozdenui_webview: the web view of the system, WebKitGTK, with cgo): built, then a
-  # real window under a virtual screen (xvfb) that measures its page and closes itself. webview_go asks for
-  # webkit2gtk-4.0, which Ubuntu 24.04 no longer has: the job tells which system builds it.
+  # real window under a virtual screen (xvfb) that measures its page and closes itself.
+  # WHY 22.04: webview_go asks for webkit2gtk-4.0, which Ubuntu 24.04 and newer no longer have (only 4.1).
   linux-webview:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-22.04, ubuntu-24.04]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
