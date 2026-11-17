@@ -12,12 +12,13 @@ import (
 )
 
 const (
-	pageColor  = "#F4F5F7"
-	cardColor  = "#FFFFFF"
-	textSoft   = "#5A6270"
-	formWidth  = 520
-	firstColor = "#3871E0"
-	dateLayout = "2006-01-02" // the dates of the kit: "YYYY-MM-DD"
+	pageColor     = "#F4F5F7"
+	cardColor     = "#FFFFFF"
+	cardColorDark = "#232322"
+	textSoft      = "#5A6270"
+	formWidth     = 520
+	firstColor    = "#3871E0"
+	dateLayout    = "2006-01-02" // the dates of the kit: "YYYY-MM-DD"
 )
 
 var (
@@ -38,13 +39,23 @@ func titled(title string, content func()) *ui.Object {
 	})
 }
 
+// cardGround is the color of the card in the theme of the window.
+func cardGround() string {
+	if ui.IsDark() {
+		return cardColorDark
+	}
+	return cardColor
+}
+
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	today := time.Now()
 	nextWeek := today.AddDate(0, 0, 7)
 	ui.ScrollArea(ui.ScrollAreaProps{Align: "center top", Gap: 16, Padding: 30}, func() {
 		ui.Label(ui.Props{Text: "A reservation", FontSize: 24, Bold: true})
-		ui.VGroup(ui.Props{Width: formWidth, Height: "auto", Align: "left top", Gap: 14, Padding: 20, Color: cardColor, Round: 12}, func() {
+		ui.VGroup(ui.Props{Width: formWidth, Height: "auto", Align: "left top", Gap: 14, Padding: 20, Color: cardGround(), Round: 12}, func() {
 			name = ui.TextField(ui.TextFieldProps{TitleText: "Name", Placeholder: "Ada", Required: true, Width: "100%", OnEnter: send})
 			email = ui.EmailField(ui.EmailFieldProps{TitleText: "E-mail", Required: true, Width: "100%", OnEnter: send})
 			password = ui.PasswordField(ui.PasswordFieldProps{TitleText: "Password", Required: false, MinLength: 6, Width: "100%"})

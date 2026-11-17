@@ -82,8 +82,8 @@ func main() {
 
 // A small picture made here (an SVG): a ground and a sun.
 func pictureOf(ground, sun string) string {
-	return ui.Picture([]byte(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="%s"/>`+
-		`<circle cx="100" cy="90" r="46" fill="%s"/><rect y="150" width="200" height="50" fill="%s" opacity="0.5"/></svg>`, ground, sun, sun)))
+	return ui.Picture(fmt.Appendf(nil, `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect width="200" height="200" fill="%s"/>`+
+		`<circle cx="100" cy="90" r="46" fill="%s"/><rect y="150" width="200" height="50" fill="%s" opacity="0.5"/></svg>`, ground, sun, sun))
 }
 
 func start(page *ui.Object) {

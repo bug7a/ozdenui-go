@@ -41,7 +41,9 @@ func liveValue(tick int) float64 {
 }
 
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	labels := []string{}
 	values := []float64{}
 	for tick := 0; tick < livePoints; tick++ {

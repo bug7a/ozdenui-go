@@ -10,12 +10,13 @@ import (
 )
 
 const (
-	pageColor   = "#F4F5F7"
-	cardColor   = "#FFFFFF"
-	textSoft    = "#5A6270"
-	formWidth   = 460
-	panelHeight = 250
-	firstName   = "Ada"
+	pageColor     = "#F4F5F7"
+	cardColor     = "#FFFFFF"
+	cardColorDark = "#232322"
+	textSoft      = "#5A6270"
+	formWidth     = 460
+	panelHeight   = 250
+	firstName     = "Ada"
 )
 
 var qualities = []string{"Low", "Normal", "High"}
@@ -29,11 +30,21 @@ func main() {
 	ui.Run(start, ui.Window{Title: "Settings", Width: 580, Height: 560})
 }
 
+// cardGround is the color of the card in the theme of the window.
+func cardGround() string {
+	if ui.IsDark() {
+		return cardColorDark
+	}
+	return cardColor
+}
+
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	ui.VGroup(ui.Props{Gap: 16, Padding: 30, Align: "left top"}, func() {
 		ui.Label(ui.Props{Text: "Settings", FontSize: 24, Bold: true})
-		ui.VGroup(ui.Props{Width: formWidth + 40, Height: "auto", Align: "left top", Gap: 16, Padding: 20, Color: cardColor, Round: 12}, func() {
+		ui.VGroup(ui.Props{Width: formWidth + 40, Height: "auto", Align: "left top", Gap: 16, Padding: 20, Color: cardGround(), Round: 12}, func() {
 			tabs := ui.Tabs(ui.TabsProps{Tabs: []string{"General", "Notifications", "Sound"}, PanelHeight: panelHeight})
 			tabs.Panel("General", generalPanel)
 			tabs.Panel("Notifications", notificationsPanel)
