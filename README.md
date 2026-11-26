@@ -60,15 +60,16 @@ func add(step int) {
 go get github.com/bug7a/ozdenui-go
 ```
 
-v0.2, experimental: tested by hand on macOS and Windows 11; Linux uses the window of Edge or Chrome and is checked by
-the tests of the repository, not yet by hand. Go 1.22 or newer.
+v0.2, experimental: tested on macOS, Windows 11 and Linux (Ubuntu 24.04 with its Chromium); Linux uses the window of
+Chrome, Chromium or Edge. Go 1.22 or newer.
 
 - **macOS:** the window is the web view of the system (WKWebView), inside the program. It needs cgo: the command line
   tools of Xcode (`xcode-select --install`). The first build takes about ten seconds and may print warnings of the web
   view's C code; the next ones are fast.
 - **Windows:** the window is the web view of the system (WebView2, in every Windows 11 and in most Windows 10), inside
   the program. No C compiler is needed. A computer without WebView2 gets the app window of Edge or Chrome.
-- **Linux:** the window is an app window of Edge or Chrome (no address bar, no tabs). No C compiler is needed.
+- **Linux:** the window is an app window of Chrome, Chromium or Edge (no address bar, no tabs); Ubuntu's Chromium, a
+  snap, too. No C compiler is needed.
 
 **With an AI assistant** (Claude Code, Codex, Cursor, Copilot...): OzdenUI is new, so an assistant does not know it
 yet. One command writes its rules (how a program is made, the layout, the events, the components, the mistakes to
@@ -213,8 +214,8 @@ In a dark window every component takes its dark look by itself, and the plain ob
 
 ## Limits of v0.2
 
-- macOS and Windows are tested by hand. Linux opens the app window of Edge or Chrome (with none of them: a tab of the
-  default browser). The web view of the system on Linux (WebKitGTK) is a choice: `go build -tags ozdenui_webview .`
+- macOS, Windows and Linux are tested (Linux: Ubuntu 24.04 with its Chromium). Linux opens the app window of Chrome,
+  Chromium or Edge (with none of them: a tab of the default browser). The web view of the system on Linux (WebKitGTK) is a choice: `go build -tags ozdenui_webview .`
   with a C compiler and `libgtk-3-dev libwebkit2gtk-4.0-dev`. The CI builds it and opens its window on Ubuntu 22.04;
   Ubuntu 24.04 and newer have only webkit2gtk-4.1, so it does not build there.
 - Windows: the window is sharp on the scale of the main screen; on a second screen with another scale it is

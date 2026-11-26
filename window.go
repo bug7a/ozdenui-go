@@ -94,7 +94,8 @@ func openBrowserWindow(app *application, address string, isTab bool) {
 	if browser != "" {
 		// WHY a profile of the program: the browser is a process of its own then, which ends with the window (a browser
 		//      that was already open would take the window into its process, with its tabs and its size)
-		profile := filepath.Join(cacheFolder(), "browser-profile-"+programName())
+		profile := browserProfile(browser)
+		_ = os.MkdirAll(profile, 0o755)
 		arguments := append([]string{
 			"--app=" + address, fmt.Sprintf("--window-size=%d,%d", app.window.Width, app.window.Height),
 			"--user-data-dir=" + profile, "--no-first-run", "--no-default-browser-check"}, profileFlags...)
@@ -159,6 +160,52 @@ func cacheFolder() string {
 		folder = os.TempDir()
 	}
 	return filepath.Join(folder, "ozdenui")
+}
+
+// The profile of the program in a browser.
+func browserProfile(browser string) string {
+	// WHY the folder of a snap: Ubuntu's Chromium is a snap, which can not write a hidden folder of the home (~/.cache):
+	//      it showed "Failed To Create Data Directory" and the page never came. Its own ~/snap/<name>/common it can.
+	if name := snapName(browser); name != "" {
+		if home, err := os.UserHomeDir(); err == nil {
+			return filepath.Join(home, "snap", name, "common", "ozdenui", "browser-profile-"+programName())
+		}
+	}
+	return filepath.Join(cacheFolder(), "browser-profile-"+programName())
+}
+
+// The snap a browser command starts: /snap/bin/chromium, or a script that runs one (Ubuntu's
+// /usr/bin/chromium-browser); "" for any other browser.
+func snapName(browser string) string {
+	if runtime.GOOS != "linux" {
+		return ""
+	}
+	text := browser
+	if !strings.HasPrefix(browser, "/snap/bin/") {
+		file, err := os.Open(browser)
+		if err != nil {
+			return ""
+		}
+		defer file.Close()
+		head := make([]byte, 4096) // a script is small; a browser itself is a program, not read further
+		count, _ := file.Read(head)
+		if count < 2 || string(head[:2]) != "#!" {
+			return ""
+		}
+		text = string(head[:count])
+	}
+	at := strings.Index(text, "/snap/bin/")
+	if at < 0 {
+		return ""
+	}
+	name := text[at+len("/snap/bin/"):]
+	end := strings.IndexFunc(name, func(letter rune) bool {
+		return !(letter >= 'a' && letter <= 'z' || letter >= '0' && letter <= '9' || letter == '-')
+	})
+	if end >= 0 {
+		name = name[:end]
+	}
+	return name
 }
 
 // A browser of this computer that opens an app window (Chromium kind): Edge is on every Windows.

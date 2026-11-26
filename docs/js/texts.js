@@ -38,7 +38,7 @@ const TEXTS = {
         copyFailed: "The code could not be copied.",
 
         // HERO
-        heroEyebrow: "v{version} · experimental · Go {go}+ · tested\u00A0on\u00A0macOS\u00A0and\u00A0Windows", // WHY \u00A0: on a phone "tested on macOS and Windows" goes to the second line together
+        heroEyebrow: "v{version} · experimental · Go {go}+ · tested\u00A0on\u00A0macOS,\u00A0Windows\u00A0and\u00A0Linux", // WHY \u00A0: on a phone "tested on macOS and Windows" goes to the second line together
         heroTitle: "Modern desktop windows, in\u00A0plain\u00A0Go", // WHY \u00A0: the line breaks before "in", and "Go" is never alone on a line
         heroLead: "Write the window in Go: boxes, texts, buttons and ready components appear in a small window of its own. Only Go: no JavaScript, no HTML, no CSS, no front-end build. The built program is one file.",
         heroPrimary: "Get started",
@@ -202,7 +202,7 @@ const TEXTS = {
         readHandbook: "Read the handbook", // the hero and the end of Start: a verb, as the other buttons
         agentsTitle: "With an AI assistant",
         agentsText: "OzdenUI is new, so an assistant does not know it yet. One command writes its rules (the layout, the events, the components, the mistakes to avoid) into AGENTS.md of your project, where Claude Code, Codex, Cursor or Copilot read them by themselves. And the assistant can look at the window it made, without a window.",
-        startNote: "Go {go}+. Tested on macOS and Windows: the window is the web view of the system (WKWebView, WebView2). On Linux it is an app window of Edge or Chrome, checked by the tests of the repository, not yet by hand.",
+        startNote: "Go {go}+. Tested on macOS, Windows and Linux: the window is the web view of the system (WKWebView, WebView2). On Linux it is an app window of Chrome, Chromium or Edge (tested on Ubuntu 24.04 with its Chromium).",
 
         // FOOTER
         footerText: "OzdenUI for Go is open source under the {license} license.",
@@ -228,7 +228,7 @@ const TEXTS = {
         copyFailed: "Kod kopyalanamadı.",
 
         // HERO
-        heroEyebrow: "v{version} · deneysel · Go {go}+ · macOS'ta\u00A0ve\u00A0Windows'ta\u00A0denendi",
+        heroEyebrow: "v{version} · deneysel · Go {go}+ · macOS,\u00A0Windows\u00A0ve\u00A0Linux'ta\u00A0denendi",
         heroTitle: "Düz Go ile modern masaüstü pencereleri",
         heroLead: "Pencereyi Go ile yazın: kutular, metinler, düğmeler ve hazır bileşenler kendi küçük penceresinde görünür. Yalnız Go: JavaScript, HTML, CSS ve ön yüz derlemesi yok. Derlenen program tek bir dosyadır.",
         heroPrimary: "Başlayın",
@@ -392,7 +392,7 @@ const TEXTS = {
         readHandbook: "El kitabını okuyun",
         agentsTitle: "Bir yapay zekâ yardımcısıyla",
         agentsText: "OzdenUI yeni, bu yüzden yardımcılar onu henüz bilmez. Tek bir komut, kurallarını (yerleşim, olaylar, bileşenler, kaçınılacak hatalar) projenizin AGENTS.md dosyasına yazar; Claude Code, Codex, Cursor ya da Copilot onları kendiliğinden okur. Yardımcı, yaptığı pencereye pencere açmadan da bakabilir.",
-        startNote: "Go {go}+. macOS'ta ve Windows'ta denendi: pencere sistemin web görünümüdür (WKWebView, WebView2). Linux'ta Edge'in ya da Chrome'un bir uygulama penceresidir; deponun testleriyle denetlenir, henüz elle denenmedi.",
+        startNote: "Go {go}+. macOS'ta, Windows'ta ve Linux'ta denendi: pencere sistemin web görünümüdür (WKWebView, WebView2). Linux'ta Chrome'un, Chromium'un ya da Edge'in bir uygulama penceresidir (Ubuntu 24.04'te, onun Chromium'uyla denendi).",
 
         // FOOTER
         footerText: "OzdenUI for Go, {license} lisansı ile açık kaynaktır.",

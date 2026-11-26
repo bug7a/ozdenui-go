@@ -27,6 +27,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"regexp"
+	"runtime"
 	"slices"
 	"strings"
 	"testing"
@@ -176,6 +177,27 @@ func TestBrowserStaysPrivate(t *testing.T) {
 	bridge, _ := os.ReadFile("web/bridge.js")
 	if !strings.Contains(string(bridge), "centerWindow();") {
 		t.Error("web/bridge.js: the window of a browser is not centered")
+	}
+}
+
+// Ubuntu's Chromium is a snap: the profile of the program goes into the folder of the snap, which it can write.
+func TestBrowserProfileOfASnap(t *testing.T) {
+	if runtime.GOOS != "linux" {
+		t.Skip("a snap is a package of Linux")
+	}
+	wrapper := filepath.Join(t.TempDir(), "chromium-browser")
+	_ = os.WriteFile(wrapper, []byte("#!/bin/sh\n# the wrapper of Ubuntu\nexec /snap/bin/chromium \"$@\"\n"), 0o755)
+	for path, want := range map[string]string{"/snap/bin/chromium": "chromium", wrapper: "chromium", "/bin/sh": ""} {
+		if got := snapName(path); got != want {
+			t.Errorf("snapName(%q) = %q, want %q", path, got, want)
+		}
+	}
+	home, _ := os.UserHomeDir()
+	if got := browserProfile("/snap/bin/chromium"); !strings.HasPrefix(got, filepath.Join(home, "snap", "chromium", "common", "ozdenui")) {
+		t.Errorf("the profile of a snap: %s", got)
+	}
+	if got := browserProfile("/bin/sh"); !strings.HasPrefix(got, cacheFolder()) {
+		t.Errorf("the profile of another browser: %s", got)
 	}
 }
 

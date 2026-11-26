@@ -226,8 +226,8 @@ program yaklaşık 15 MB'tır. macOS'ta derleme cgo ister (sistemin web görün�
 
 ## v0.2'nin sınırları
 
-- macOS ve Windows elle denendi. Linux, Edge'in ya da Chrome'un uygulama penceresini açar (hiçbiri yoksa varsayılan
-  tarayıcının bir sekmesini); onu deponun testleri denetler, elle henüz denenmedi.
+- macOS, Windows ve Linux denendi (Linux: Ubuntu 24.04 ve onun Chromium'u). Linux, Chrome'un, Chromium'un ya da
+  Edge'in uygulama penceresini açar (hiçbiri yoksa varsayılan tarayıcının bir sekmesini).
 - Linux'ta sistemin web görünümü (WebKitGTK) bir seçenektir: `go build -tags ozdenui_webview .`, bir C derleyicisi ve
   `libgtk-3-dev libwebkit2gtk-4.0-dev` ile. Ubuntu 22.04'te çalışır (testler penceresini orada açar); Ubuntu 24.04 ve
   sonrasında yalnızca webkit2gtk-4.1 var, bu yüzden orada derlenmez.

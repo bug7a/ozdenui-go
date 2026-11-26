@@ -231,4 +231,4 @@ Each is a function of `ozdenui` with its `...Props` type; its state is read from
 - A check that plays the program from code must not reach a dialog: it waits for a person.
 - `ui.Window{Debug: true}` gives the developer tools of the web view (right click > Inspect).
 - macOS: the window is the web view of the system (it needs cgo: the command line tools of Xcode). Windows: the web
-  view of the system (WebView2, no C compiler). Linux: the app window of Edge or Chrome. The first build takes a while and may print warnings of the web view's C code.
+  view of the system (WebView2, no C compiler). Linux: the app window of Chrome, Chromium or Edge. The first build takes a while and may print warnings of the web view's C code.
