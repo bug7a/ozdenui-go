@@ -11,10 +11,11 @@ import (
 )
 
 const (
-	pageColor   = "#F4F5F7"
-	screenColor = "#FFFFFF"
-	errorText   = "Error"
-	mostDigits  = 12
+	pageColor       = "#F4F5F7"
+	screenColor     = "#FFFFFF"
+	screenColorDark = "#232322"
+	errorText       = "Error"
+	mostDigits      = 12
 )
 
 var keys = []string{"C", "÷", "7", "8", "9", "×", "4", "5", "6", "−", "1", "2", "3", "+", "0", ".", "="}
@@ -42,10 +43,20 @@ func main() {
 	ui.Run(start, ui.Window{Title: "Calculator", Width: 320, Height: 410})
 }
 
+// screenGround is the color of the screen in the theme of the window.
+func screenGround() string {
+	if ui.IsDark() {
+		return screenColorDark
+	}
+	return screenColor
+}
+
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	ui.VGroup(ui.Props{Gap: 10, Padding: 16, Align: "left top"}, func() {
-		screen = ui.Label(ui.Props{Text: "0", Width: "100%", FontSize: 34, Bold: true, TextAlign: "right", Color: screenColor,
+		screen = ui.Label(ui.Props{Text: "0", Width: "100%", FontSize: 34, Bold: true, TextAlign: "right", Color: screenGround(),
 			Round: 10, Padding: []int{14, 8}, Shrink: 0})
 		wide := map[*ui.Object]int{}
 		grid := ui.GridGroup(ui.GridGroupProps{Columns: 4, Gap: 8}, func() {

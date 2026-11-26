@@ -21,7 +21,9 @@ func main() {
 }
 
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	ui.VGroup(ui.Props{Gap: 14, Padding: 40}, func() {
 		name = ui.TextField(ui.TextFieldProps{TitleText: "What is your name?", Placeholder: "Ada", Width: 300, OnEnter: greet})
 		ui.SmartButton(ui.SmartButtonProps{LabelText: "Greet", Tone: "cyan", OnClick: greet})

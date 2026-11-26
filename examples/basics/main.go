@@ -33,7 +33,9 @@ func main() {
 }
 
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 
 	// An object has a place: Left, Top, Width, Height. The objects made in the function of a Box are inside it.
 	card = ui.Box(ui.Props{Left: 20, Top: 20, Width: 320, Height: 110, Color: cardColors[0], Round: 12}, func() {

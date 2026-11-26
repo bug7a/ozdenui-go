@@ -21,7 +21,9 @@ func main() {
 }
 
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	ui.VGroup(ui.Props{Gap: 16, Padding: 36, Align: "left top"}, func() {
 		ui.Label(ui.Props{Text: "Dialogs", FontSize: 24, Bold: true})
 		ui.HGroup(ui.Props{Hug: true, Gap: 8}, func() {

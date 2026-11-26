@@ -19,7 +19,9 @@ func main() {
 }
 
 func start(page *ui.Object) {
-	page.Set("color", "#F4F5F7")
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", "#F4F5F7")
+	}
 	ui.VGroup(ui.Props{Gap: 16}, func() {
 		label = ui.Label(ui.Props{Text: "0", FontSize: 48})
 		ui.HGroup(ui.Props{Hug: true, Gap: 10}, func() {

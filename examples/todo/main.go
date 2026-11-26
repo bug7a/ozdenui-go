@@ -31,7 +31,9 @@ func main() {
 }
 
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	items := []ui.P{}
 	for _, title := range firstTasks {
 		items = append(items, newItem(title))

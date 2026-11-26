@@ -48,7 +48,9 @@ func main() {
 }
 
 func start(page *ui.Object) {
-	page.Set("color", pageColor)
+	if !ui.IsDark() { // a dark window has its own ground
+		page.Set("color", pageColor)
+	}
 	ui.VGroup(ui.Props{Gap: 14, Padding: 30, Align: "left top"}, func() {
 		ui.HGroup(ui.Props{Hug: true, Gap: 14, Align: "left center"}, func() {
 			ui.Label(ui.Props{Text: "CSV viewer", FontSize: 24, Bold: true})

@@ -10,7 +10,11 @@ import (
 	ui "github.com/bug7a/ozdenui-go"
 )
 
-const pageColor = "#F4F5F7"
+const (
+	pageColor    = "#F4F5F7"
+	barColor     = "#FFFFFF"
+	barColorDark = "#232322"
+)
 
 var (
 	notes []string   // the data of the program is plain Go
@@ -25,9 +29,14 @@ func main() {
 }
 
 func start(page *ui.Object) { // runs when the window is ready: make the objects here
-	page.Set("color", pageColor)
+	bar := barColor
+	if ui.IsDark() { // a dark window has its own ground: only the bar takes a color
+		bar = barColorDark
+	} else {
+		page.Set("color", pageColor)
+	}
 	ui.VGroup(ui.Props{Gap: 0}, func() { // a group is as large as its box: here the whole window
-		ui.HGroup(ui.Props{Height: 60, Padding: []int{16, 0}, Gap: 10, Align: "left center", Color: "white"}, func() {
+		ui.HGroup(ui.Props{Height: 60, Padding: []int{16, 0}, Gap: 10, Align: "left center", Color: bar}, func() {
 			name = ui.TextField(ui.TextFieldProps{Placeholder: "A new note", Width: 260, OnEnter: addNote})
 			ui.SmartButton(ui.SmartButtonProps{LabelText: "Add", Tone: "cyan", OnClick: addNote})
 		})
