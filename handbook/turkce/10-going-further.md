@@ -229,11 +229,11 @@ program yaklaşık 15 MB'tır. macOS'ta derleme cgo ister (sistemin web görün�
 
 ## v0.2'nin sınırları
 
-- macOS, Windows ve Linux denendi (Linux: Ubuntu 24.04 ve onun Chromium'u). Linux, Chrome'un, Chromium'un ya da
-  Edge'in uygulama penceresini açar (hiçbiri yoksa varsayılan tarayıcının bir sekmesini).
-- Linux'ta sistemin web görünümü (WebKitGTK) bir seçenektir: `go build -tags ozdenui_webview .`, bir C derleyicisi ve
-  `libgtk-3-dev libwebkit2gtk-4.0-dev` ile. Ubuntu 22.04'te çalışır (testler penceresini orada açar); Ubuntu 24.04 ve
-  sonrasında yalnızca webkit2gtk-4.1 var, bu yüzden orada derlenmez.
+- macOS, Windows ve Linux denendi (Linux: Ubuntu 24.04, WebKitGTK ile ve Chromium ile). WebKitGTK'sı olmayan bir
+  Linux bilgisayar Chrome'un, Chromium'un ya da Edge'in uygulama penceresini açar (hiçbiri yoksa varsayılan
+  tarayıcının bir sekmesini).
+- WebKitGTK'ya cgo ile giden eski yol (`go build -tags ozdenui_webview .`, `libgtk-3-dev libwebkit2gtk-4.0-dev`)
+  Ubuntu 22.04 için duruyor; programın ona ihtiyacı yok.
 - Windows'ta pencere ana ekranın ölçeğinde nettir; başka ölçekte ikinci bir ekranda sistem onu gerer.
 - Bir program için tek pencere.
 - Hemen cevap vermesi gereken bir callback bir Go fonksiyonu olamaz, çünkü cevap sonra gelir: bir doğrulayıcı, bir

@@ -1,12 +1,13 @@
-//go:build !(cgo && (darwin || ozdenui_webview) && !ozdenui_browser) && !(windows && !ozdenui_browser)
+//go:build !(cgo && (darwin || ozdenui_webview) && !ozdenui_browser) && !(windows && !ozdenui_browser) && !(linux && !ozdenui_browser)
 
 /* Bismillah */
 
 /*
 
 window_nowebview.go - ozdenui v0.1 (OzdenUI: basic.js for Go)
-A build without the web view of the system (macOS without cgo, Linux without the tag ozdenui_webview, the tag
-ozdenui_browser): the window is the app window of a browser (window.go). Windows: window_windows.go.
+A build without the web view of the system (macOS without cgo, the tag ozdenui_browser, a system that is not macOS,
+Windows or Linux): the window is the app window of a browser (window.go). Windows: window_windows.go, Linux:
+window_linux.go.
 
 Started Date: November 2026
 Webpage: https://bug7a.github.io/ozdenui-go/

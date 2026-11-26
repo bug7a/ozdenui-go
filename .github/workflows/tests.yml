@@ -44,6 +44,31 @@ jobs:
           path: pictures
           if-no-files-found: ignore
 
+  # The window of Linux: WebKitGTK of the system, loaded when the program runs (window_linux.go), built without cgo
+  # and with only the library of WebKitGTK (no -dev package, no C compiler); a real window under a virtual screen
+  # (xvfb) that measures its page and closes itself. WHY the check of the browser: Chrome is on the runner, and a
+  # failed web view would open its window instead.
+  linux-gtk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: WebKitGTK, only its library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libwebkit2gtk-4.1-0 xvfb xauth
+      - name: A real window of WebKitGTK that measures its page
+        shell: bash
+        run: |
+          export CGO_ENABLED=0 PROBE_CLOSE=1 PROBE_REPORT="$PWD/page.txt"
+          timeout 120 xvfb-run -a go run ./checks/window-check
+          echo "The page: $(cat page.txt)"
+          grep -q "^480 x 320" page.txt
+          grep -q "Safari" page.txt && ! grep -q "Chrome" page.txt
+
   # The tagged path of Linux (-tags ozdenui_webview: the web view of the system, WebKitGTK, with cgo): built, then a
   # real window under a virtual screen (xvfb) that measures its page and closes itself.
   # WHY 22.04: webview_go asks for webkit2gtk-4.0, which Ubuntu 24.04 and newer no longer have (only 4.1).

@@ -7,8 +7,10 @@ How the window opens: the web view of the system, or the window of a browser of 
 
 - macOS: the web view of the system (WKWebView), in the program itself (cgo: the command line tools of Xcode).
 - Windows: the web view of the system (WebView2, window_windows.go), without cgo; without WebView2 the app window below.
-- Linux, and macOS without cgo: an app window of Edge or Chrome (no address bar, no tabs). With no such browser: a tab
-  of the default browser.
+- Linux: the web view of the system (WebKitGTK, window_linux.go), loaded when the program runs, without cgo; without it
+  the app window below.
+- macOS without cgo, and the computers above without their web view: an app window of Chrome, Chromium or Edge (no
+  address bar, no tabs). With no such browser: a tab of the default browser.
 - OZDENUI_LOOK=picture.png: no window; the page is drawn by a hidden Chrome and saved as a picture (look.go).
 
 Environment: OZDENUI_WINDOW=browser (the browser window also where the web view works), =tab (the default browser),

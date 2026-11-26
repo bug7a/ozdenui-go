@@ -21,6 +21,27 @@ The site: https://bug7a.github.io/ozdenui-go/ and the handbook, ten short chapte
 
 The window above is [examples/gallery](examples/gallery/main.go), the main components of the kit in one window.
 
+## Why OzdenUI
+
+Made for a small tool, a command line program that needs a window, and a tool given to a team as one file.
+
+- **Only Go.** The window is made of Go values: no HTML, CSS or JavaScript to write, no Node or npm, no build step of
+  a front end.
+- **One file to give away.** `go build` makes one program (about 15 MB) with the page, basic.js and the components
+  inside it: nothing else to install. Its window is the web view of the system: WKWebView, WebView2, WebKitGTK.
+- **A modern look from the first line.** 83 components of the [OzdenUI kit](https://bug7a.github.io/js-components/),
+  each with its own Go type: buttons, fields, lists, a table of 100000 rows, charts, a date picker, a chat, a JSON
+  editor, a canvas. A dark window is one word: `ui.Window{Theme: "dark"}`.
+- **Typed params.** Every component has its Props struct: the editor offers the names, the compiler catches a
+  misspelled one.
+- **Code that reads like the window.** A group takes a function that makes its objects, so the shape of the code is
+  the shape of the window. Your program runs on one goroutine, one task at a time: no locks.
+- **Easy to learn, with an AI assistant too.** A handbook of ten short chapters in English and Turkish, every program
+  in it built by the tests. One command teaches your assistant the module, and `OZDENUI_LOOK=app.png go run .` lets
+  it see the window it made.
+- **Tested on three systems.** At every push the tests run and every example is drawn on Windows, macOS and Linux.
+  Open source, Apache 2.0.
+
 ```go
 package main
 
@@ -60,16 +81,16 @@ func add(step int) {
 go get github.com/bug7a/ozdenui-go
 ```
 
-v0.2, experimental: tested on macOS, Windows 11 and Linux (Ubuntu 24.04 with its Chromium); Linux uses the window of
-Chrome, Chromium or Edge. Go 1.22 or newer.
+v0.2, experimental: tested on macOS, Windows 11 and Linux (Ubuntu 24.04). Go 1.22 or newer.
 
 - **macOS:** the window is the web view of the system (WKWebView), inside the program. It needs cgo: the command line
   tools of Xcode (`xcode-select --install`). The first build takes about ten seconds and may print warnings of the web
   view's C code; the next ones are fast.
 - **Windows:** the window is the web view of the system (WebView2, in every Windows 11 and in most Windows 10), inside
   the program. No C compiler is needed. A computer without WebView2 gets the app window of Edge or Chrome.
-- **Linux:** the window is an app window of Chrome, Chromium or Edge (no address bar, no tabs); Ubuntu's Chromium, a
-  snap, too. No C compiler is needed.
+- **Linux:** the window is the web view of the system (WebKitGTK), inside the program. No C compiler is needed: its
+  library is loaded when the program runs. Most desktops have it; if not: `sudo apt install libwebkit2gtk-4.1-0`
+  (Debian, Ubuntu). Without it the window is an app window of Chrome, Chromium or Edge.
 
 **With an AI assistant** (Claude Code, Codex, Cursor, Copilot...): OzdenUI is new, so an assistant does not know it
 yet. One command writes its rules (how a program is made, the layout, the events, the components, the mistakes to
@@ -214,10 +235,9 @@ In a dark window every component takes its dark look by itself, and the plain ob
 
 ## Limits of v0.2
 
-- macOS, Windows and Linux are tested (Linux: Ubuntu 24.04 with its Chromium). Linux opens the app window of Chrome,
-  Chromium or Edge (with none of them: a tab of the default browser). The web view of the system on Linux (WebKitGTK)
-  is a choice: `go build -tags ozdenui_webview .` with a C compiler and `libgtk-3-dev libwebkit2gtk-4.0-dev`. The CI builds it and opens its window on Ubuntu 22.04;
-  Ubuntu 24.04 and newer have only webkit2gtk-4.1, so it does not build there.
+- macOS, Windows and Linux are tested (Linux: Ubuntu 24.04, with WebKitGTK and with Chromium). A Linux computer
+  without WebKitGTK opens the app window of Chrome, Chromium or Edge (with none of them: a tab of the default browser).
+  The older way to WebKitGTK, with cgo (`-tags ozdenui_webview`, webkit2gtk-4.0), is still there for Ubuntu 22.04.
 - Windows: the window is sharp on the scale of the main screen; on a second screen with another scale it is
   stretched by the system.
 - One window for a program.
