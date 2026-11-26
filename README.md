@@ -89,8 +89,9 @@ v0.2, experimental: tested on macOS, Windows 11 and Linux (Ubuntu 24.04). Go 1.2
 - **Windows:** the window is the web view of the system (WebView2, in every Windows 11 and in most Windows 10), inside
   the program. No C compiler is needed. A computer without WebView2 gets the app window of Edge or Chrome.
 - **Linux:** the window is the web view of the system (WebKitGTK), inside the program. No C compiler is needed: its
-  library is loaded when the program runs. GNOME desktops usually have it; if not, on Debian or Ubuntu:
-  `sudo apt install libwebkit2gtk-4.1-0`. Without it the window is an app window of Chrome, Chromium or Edge.
+  library is loaded when the program runs. The desktop of Ubuntu always has it (its help app needs it), other GNOME
+  desktops usually do; if not, on Debian or Ubuntu: `sudo apt install libwebkit2gtk-4.1-0`. Without it the window is
+  an app window of Chrome, Chromium or Edge.
 
 **With an AI assistant** (Claude Code, Codex, Cursor, Copilot...): OzdenUI is new, so an assistant does not know it
 yet. One command writes its rules (how a program is made, the layout, the events, the components, the mistakes to
