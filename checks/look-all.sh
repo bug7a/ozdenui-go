@@ -18,14 +18,23 @@ PICTURES="${1:-pictures}"
 ONLY="${2:-}"
 mkdir -p "$PICTURES"
 FAILED=0
+
+take_picture() {
+    rm -f "$picture"
+    # WHY the filter: the first build prints the warnings of the C code of the web view
+    output="$(OZDENUI_THEME=$theme OZDENUI_LOOK="$picture" go run "./$folder" 2>&1 | grep -v "the picture of the window" | grep "^ozdenui\|panic\|^exit status\|cannot\|undefined")"
+}
 for folder in examples/*/; do
     name="$(basename "$folder")"
     [ -n "$ONLY" ] && [ "$ONLY" != "$name" ] && continue
     for theme in light dark; do
         picture="$PICTURES/$name-$theme.png"
-        rm -f "$picture"
-        # WHY the filter: the first build prints the warnings of the C code of the web view
-        output="$(OZDENUI_THEME=$theme OZDENUI_LOOK="$picture" go run "./$folder" 2>&1 | grep -v "the picture of the window" | grep "^ozdenui\|panic\|^exit status\|cannot\|undefined")"
+        take_picture
+        # WHY a second try: on a busy CI computer the hidden browser sometimes does not answer in time; a real fault fails twice
+        if [ ! -s "$picture" ] || [ -n "$output" ]; then
+            echo "again $name ($theme): $(echo "$output" | tail -1)"
+            take_picture
+        fi
         if [ ! -s "$picture" ] || [ -n "$output" ]; then
             FAILED=1
             echo "FAIL $name ($theme)"

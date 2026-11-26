@@ -217,8 +217,11 @@ go run github.com/bug7a/ozdenui-go/cmd/ozdenui@latest agents --print      # only
 
 ```
 go build -o notes .                       # one file: the page of the window and the kit are inside it
-GOOS=windows GOARCH=amd64 go build .      # a program for Windows, built on another computer
+GOOS=windows GOARCH=amd64 go build -ldflags -H=windowsgui .   # for Windows, built on another computer
 ```
+
+`-ldflags -H=windowsgui` is for a program given to people on Windows: without it a double click opens a black console
+window next to the window of the program (its prints go there).
 
 The page, basic.js and the components are embedded (`go:embed`), so the built program needs no other file. A small
 program is about 15 MB. On macOS the build needs cgo (the web view of the system); Windows and Linux need no C compiler.

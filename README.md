@@ -215,8 +215,8 @@ In a dark window every component takes its dark look by itself, and the plain ob
 ## Limits of v0.2
 
 - macOS, Windows and Linux are tested (Linux: Ubuntu 24.04 with its Chromium). Linux opens the app window of Chrome,
-  Chromium or Edge (with none of them: a tab of the default browser). The web view of the system on Linux (WebKitGTK) is a choice: `go build -tags ozdenui_webview .`
-  with a C compiler and `libgtk-3-dev libwebkit2gtk-4.0-dev`. The CI builds it and opens its window on Ubuntu 22.04;
+  Chromium or Edge (with none of them: a tab of the default browser). The web view of the system on Linux (WebKitGTK)
+  is a choice: `go build -tags ozdenui_webview .` with a C compiler and `libgtk-3-dev libwebkit2gtk-4.0-dev`. The CI builds it and opens its window on Ubuntu 22.04;
   Ubuntu 24.04 and newer have only webkit2gtk-4.1, so it does not build there.
 - Windows: the window is sharp on the scale of the main screen; on a second screen with another scale it is
   stretched by the system.

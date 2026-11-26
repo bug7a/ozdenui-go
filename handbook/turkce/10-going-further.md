@@ -218,8 +218,11 @@ go run github.com/bug7a/ozdenui-go/cmd/ozdenui@latest agents --print      # yaln
 
 ```
 go build -o notes .                       # tek dosya: pencerenin sayfası ve kit içindedir
-GOOS=windows GOARCH=amd64 go build .      # Windows için bir program, başka bir bilgisayarda derlenmiş
+GOOS=windows GOARCH=amd64 go build -ldflags -H=windowsgui .   # Windows için, başka bir bilgisayarda derlenmiş
 ```
+
+`-ldflags -H=windowsgui`, Windows'ta başkalarına verilen bir program içindir: o olmadan çift tıklama, programın
+penceresinin yanında siyah bir konsol penceresi açar (yazdırdıkları oraya gider).
 
 Sayfa, basic.js ve bileşenler gömülüdür (`go:embed`); bu yüzden derlenmiş program başka bir dosya istemez. Küçük bir
 program yaklaşık 15 MB'tır. macOS'ta derleme cgo ister (sistemin web görünümü); Windows ve Linux C derleyicisi istemez.
